@@ -1,0 +1,72 @@
+1. Set the given seed and take the random number
+random.seed(givenseed)
+num=random.random()
+
+e.g. with seed 50, we get 0.4975365687586023
+
+2. Convert the num to string format and ignore the first two char. We are going to use these digits individually for our random fuzzer code
+[4975365687586023]
+
+
+3. Get the given count divide that number by 4. To get the approx number of inputs to generate for 
+    aprox = count/4
+   i. marshal test case which should pass
+   ii. marshal test which should fail
+   iii. unmarshal test case which should pass
+   iv. unmarshal test which should fail
+
+Note this is approximate number, if you give a number 10 I would say the first 3 items will have 2 cases and the last 4 will be for the 4th test case.
+In some cases, you will not have enough for all the cases. eg. if someone gives 2. In those cases just do one case as to a total of count
+
+4. Generate test cases loop
+
+cnt = 1
+while cnt <= aprox and cnt <= count
+generate test cases for i
+
+Repeat for ii, iii, and remaining  for iv
+
+
+5. Now for the generation logic
+
+I suggest the following marshal/unmarshal template. (For much more complex generation the nesting itself can be generated but that's for the next iteration)
+
+Marshal template: {'Key1':{'Key2': Int_val}, 'Key3': {'Key4': String_val}}
+
+Unmarshal template: '{Key1:{Key2:iInt_val},Key3:{Key4:String_val}}'
+
+From the converted random string (eg. 4975365687586023). We take the first two digits as a starting point for generating strings for key, send two for int, and 3rd two for strings  (ie. 49|75|36)
+
+  ie. 49 as starting Ascii value to generate Key characters
+      75 as a starting integer and 
+      36 as a starting Ascii value to generate String characters
+      
+
+6. Details of Key generation
+
+   Take the first 2 digit number you got get ASCII Char value for the key, and increment as per the counter we discussed in #3 abd repeat
+   For success loop (i): see if the  character is valid and generate the input
+   For failure loop (ii): see if the  character is valid if not skip that use invalid value and generate the input
+   
+   Create 4 keys for each test case (because our suggested template uses 4 keys)
+   
+6. Details for Int_Val generation
+
+   Take the starting number we got (e.g. 75) and generate int value (and increment)
+   For success test case you can use this number directly alternating between negative and positive (ie. add a - for one and nothing for the next)
+   For fail test cases, you can do the following
+       -Create an invalid number adding a decimal point, ie. 75.00 
+       -'empty' value and just have i in it 
+    (you can alternate between the above two, integers don't have a lot of variations if you have any special char or alpha it becomes a string or complex string)
+    For marshaling it's straightforward, use the number as it is
+
+7. Details for String_Val generation
+
+   Take the starting 2 digit number (e.g. 36 above) and use that as the starting ASCII number and increment in the loop till the max numbers discussed above
+
+   For each of these numbers convert to char and see if it's part of the valid set and use it. If its part of encoded do encoding success test case use the valid char encoded
+   For the first case you start with an empty string which is allowed.
+   For failure, cases use char which are not allowed and generate the string  
+   If it's not a % encoded string append 's' at the end. Else use it as it is. 
+
+8. For another variation of this instead of using the above well-formed template you can try and break the syntax by forming the above string and picking a random number (from the string above say the 7th character - if there is or the last char) and deleting that char before sending to unmarshal. see if it breaks the system.
