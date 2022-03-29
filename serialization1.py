@@ -36,10 +36,10 @@ def __marshal_map(py_dict):
             elif type(value) is dict:
                 ret += __marshal_map(value) + ","
             else:
-                raise SerializationError("Value for Key: " + key +" is invalid." )
+                raise SerializationError("Value for Key is invalid." )
 
         else:
-            raise SerializationError("Key: " + key + " is an invalid key.")
+            raise SerializationError("Key is an invalid key.")
     #Strips trailing comma only if map is not empty
     ret = ret[:-1] if ret != "{" else "{"
     ret += "}"    
