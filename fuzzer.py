@@ -77,11 +77,12 @@ def main():
                 marshal_implementation_container[j](k)
                 response_dict[j]['pass'] = response_dict[j].get('pass') + 1    
             except:
-                e = sys.exc_info()[0]
+                e = sys.exc_info()[1]
+                e = str(e)
                 if response_dict[j].get(e) is not None:
                     response_dict[j][e] = response_dict[j].get(e) + 1
                 else:
-                    response_dict[j][e] = 0
+                    response_dict[j][e] = 1
                 continue
     
     # Print results of run
@@ -96,7 +97,7 @@ def generateStrings(_method, _length):
         for i in range(_length):
             # Stocastically pick either a proper nosj string(0-0.5) or random string(0.5-1)
             validity = random.uniform(0,1)
-            if validity < 0.5:
+            if validity < 1:
                 ret_strings.append(__make_map(valid=True)[0])
             else:
                 ret_strings.append(__make_map(valid=False)[0])
@@ -105,6 +106,8 @@ def generateStrings(_method, _length):
         print('Invalid generation method')
         return ret_strings
 
+
+#------------CARLO's Imp---------------
 #given already created keys and values, creates either an unmarshalled or marshalled map.
 def __make_map(valid = True, map_size = random.randint(1, MAX_MAP_SIZE)):
     r = map_size
