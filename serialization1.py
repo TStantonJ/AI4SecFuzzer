@@ -52,3 +52,34 @@ def marshal(unmarshalled_state):
         raise SerializationError('Input is None')
     if type(unmarshalled_state) != dict:
         raise SerializationError('Input is not a dict')
+
+    # TODO: Validate things about the overall Python3 dict
+
+    return __marshal_map(unmarshalled_state)
+
+#Validates input for strings. Returns 0 or 1 if input is simple or complex respectively. Raises exception if input is invalid.
+def __validate_string(py_string):
+    if py_string is None or py_string == "":
+        raise SerializationError("Input is none")
+    if type(py_string) != str:
+        raise SerializationError("Input is not a str")
+
+    #Array of simple string exceptions
+    exceptions = ['%',",","{","}"]
+    if py_string.isprintable():
+        if any(x in py_string for x in exceptions):
+            #Complex string
+             return 1
+        else:
+            #Simple string
+            return 0            
+    else:
+        return 1
+
+#Validates map key using regex. Searches key for everything not containing valid characters.
+def __validate_key(key):
+    if type(key) is not str:
+        raise SerializationError("Key is not a str")
+    valid_strings = re.compile("[^\w\ \-\_\+\.]")
+    key = valid_strings.search(key)
+    return not bool(key)
