@@ -92,7 +92,7 @@ def __marshal_map(py_dict):
         if __isvalid_key(key):
             ret += key+':'
         else:
-            raise SerializationError("Invalid Key. (only alphanum (space) - _  +  . allowed) when processing '"+key+"'")
+            raise SerializationError("Invalid Key. (only alphanum (space) - _  +  . allowed)")
 
         #if dict recurse back.  
         if type(value) is dict:
@@ -102,7 +102,7 @@ def __marshal_map(py_dict):
         elif type(value) is int:
           val = __marshal_integer(value)
         else:
-            raise SerializationError("Invalid value type only Dict, String and Integer allowed:"+str(value))
+            raise SerializationError("Invalid value type only Dict, String and Integer allowed")
 
         ret += val
 
