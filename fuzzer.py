@@ -96,6 +96,7 @@ def main():
     # Print results of run
     print('\nResults:')
     for l in response_dict:
+        print('Result of Implementation:',l)
         print(response_dict[l])
 
 # Function that builds a list of input strings
