@@ -13,6 +13,13 @@ import os.path
 from os import path
 import random
 
+#TODO:
+# Add (de)serialization2 (TS)
+# Add stocastic chance to pick incorrect value in string and int functions(CB)
+# Add global configuration values for error_chance, recursion depth limit
+# Move error chance from generate_strings to its sub functions
+# Add recusion depth limit _make_map(CT)
+
 # Import the given implementations
 marshal_implementation_container = []
 unmarshal_implementation_container = []
@@ -50,8 +57,9 @@ if path.exists('serialization6.py') and path.exists('deserialization6.py'):
 from exceptions import SerializationError, DeserializationError
 
     
-# Global Variables
+# Global Variables Go Here
 NUMBER_OF_STRINGS = 10
+
 MAX_INPUT_SIZE = 20
 MAX_KEY_SIZE = 10
 MAX_VALUE_SIZE = 10
