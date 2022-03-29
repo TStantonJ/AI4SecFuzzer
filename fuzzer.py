@@ -74,7 +74,7 @@ def main():
         response_dict[j] = {'pass':0}
         for k in range(len(input_strings)):                                     # Tries every generated string on current implementation
             try:
-                marshal_implementation_container[j](k)
+                marshal_implementation_container[j](input_strings[k])
                 response_dict[j]['pass'] = response_dict[j].get('pass') + 1    
             except:
                 e = sys.exc_info()[1]
@@ -97,7 +97,7 @@ def generateStrings(_method, _length):
         for i in range(_length):
             # Stocastically pick either a proper nosj string(0-0.5) or random string(0.5-1)
             validity = random.uniform(0,1)
-            if validity < 1:
+            if validity < 0.5:
                 ret_strings.append(__make_map(valid=True)[0])
             else:
                 ret_strings.append(__make_map(valid=False)[0])
