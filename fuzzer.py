@@ -24,33 +24,33 @@ import random
 marshal_implementation_container = []
 unmarshal_implementation_container = []
 if path.exists('serialization1.py') and path.exists('deserialization1.py'):
-    from serialization1 import marshal as m1
-    from deserialization1 import unmarshal as um1
+    from serialization1 import marshal as m1                                    #type:ignore
+    from deserialization1 import unmarshal as um1                               #type:ignore
     unmarshal_implementation_container.append(um1)
     marshal_implementation_container.append(m1)
 if path.exists('serialization2.py') and path.exists('deserialization2.py'):
-    from serialization2 import marshal as m2
-    from deserialization2 import unmarshal as um2
+    from serialization2 import marshal as m2                                    #type:ignore
+    from deserialization2 import unmarshal as um2                               #type:ignore
     unmarshal_implementation_container.append(um2)
     marshal_implementation_container.append(m2)
 if path.exists('serialization3.py') and path.exists('deserialization3.py'):
-    from serialization3 import marshal as m3
-    from deserialization3 import unmarshal as um3
+    from serialization3 import marshal as m3                                    #type:ignore
+    from deserialization3 import unmarshal as um3                               #type:ignore
     unmarshal_implementation_container.append(um3)
     marshal_implementation_container.append(m3)
 if path.exists('serialization4.py') and path.exists('deserialization4.py'):
-    from serialization4 import marshal as m4
-    from deserialization4 import unmarshal as um4
+    from serialization4 import marshal as m4                                    #type:ignore
+    from deserialization4 import unmarshal as um4                               #type:ignore
     unmarshal_implementation_container.append(um4)
     marshal_implementation_container.append(m4)
 if path.exists('serialization5.py') and path.exists('deserialization5.py'):
-    from serialization5 import marshal as m5
-    from deserialization5 import unmarshal as um5
+    from serialization5 import marshal as m5                                    #type:ignore
+    from deserialization5 import unmarshal as um5                               #type:ignore
     unmarshal_implementation_container.append(um5)
     marshal_implementation_container.append(m5)
 if path.exists('serialization6.py') and path.exists('deserialization6.py'):
-    from serialization6 import marshal as m6
-    from deserialization6 import unmarshal as um6
+    from serialization6 import marshal as m6                                    #type:ignore
+    from deserialization6 import unmarshal as um6                               #type:ignore
     unmarshal_implementation_container.append(um6)
     marshal_implementation_container.append(m6)
 
