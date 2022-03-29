@@ -51,7 +51,7 @@ from exceptions import SerializationError, DeserializationError
 
     
 # Global Variables
-String_length = 10
+NUMBER_OF_STRINGS = 10
 MAX_INPUT_SIZE = 20
 MAX_KEY_SIZE = 10
 MAX_VALUE_SIZE = 10
@@ -64,7 +64,7 @@ ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the
 def main():
     print('Testing on', len(marshal_implementation_container), 'files')
     # Create random inputs
-    input_strings = generateStrings('random', String_length)
+    input_strings = generateStrings('random', NUMBER_OF_STRINGS)
     for i in range(len(input_strings)):
         print('Input',i,': ',input_strings[i])
 
@@ -122,18 +122,21 @@ def __make_map(valid = True, map_size = random.randint(1, MAX_MAP_SIZE)):
         for i in range(map_size):
             key = __make_key(valid = True)
             choice = random.randint(0,2)
+            # Make an int
             if choice == 0:
                 val = __nosj_int(valid = True)
                 unmarshalled_map[key] = val[0]
                 marshalled_map = marshalled_map + key + ":" + val[1]
                 if i != map_size:
                     marshalled_map = marshalled_map + ","
+            # Make a str
             if choice == 1:
                 val = __nosj_string(valid = True)
                 unmarshalled_map[key] = val[0]
                 marshalled_map = marshalled_map + key + ":" + val[1]
                 if i != map_size:
-                    marshalled_map = marshalled_map + ","           
+                    marshalled_map = marshalled_map + ","     
+            # make a map      
             if choice == 2:
                 val = __make_map(valid = True)
                 unmarshalled_map[key] = val[0]
@@ -148,18 +151,21 @@ def __make_map(valid = True, map_size = random.randint(1, MAX_MAP_SIZE)):
         for i in range(map_size):
             key = __make_key(valid = False)
             choice = random.randint(0,2)
+            # Make an int
             if choice == 0:
                 val = __nosj_int(valid = False)
                 unmarshalled_map[key] = val[0]
                 marshalled_map = marshalled_map + key + ":" + val[1]
                 if i != map_size:
                     marshalled_map = marshalled_map + ","
+            # Make a str
             if choice == 1:
                 val = __nosj_string(valid = False)
                 unmarshalled_map[key] = val[0]
                 marshalled_map = marshalled_map + key + ":" + val[1]
                 if i != map_size:
-                    marshalled_map = marshalled_map + ","           
+                    marshalled_map = marshalled_map + ","   
+            # Make a map        
             if choice == 2:
                 more_invalids = (random.randint(0,1) == 1)
                 val = __make_map(valid = more_invalids, map_size = r - 1)
