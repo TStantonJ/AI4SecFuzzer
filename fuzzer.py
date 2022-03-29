@@ -70,12 +70,12 @@ def main():
 
     # Apply list of generated strings to each implementation and log responses
     response_dict = {}
-    for j in range(len(marshal_implementation_container)):
+    for j in range(len(marshal_implementation_container)):                      # Itterates through every implementation present
         response_dict[j] = {'pass':0}
-        for k in range(len(input_strings)):
+        for k in range(len(input_strings)):                                     # Tries every generated string on current implementation
             try:
                 marshal_implementation_container[j](k)
-                response_dict[j]['pass'] = response_dict[j].get('pass') + 1
+                response_dict[j]['pass'] = response_dict[j].get('pass') + 1    
             except:
                 e = sys.exc_info()[0]
                 if response_dict[j].get(e) is not None:
