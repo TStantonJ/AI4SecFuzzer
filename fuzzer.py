@@ -60,6 +60,7 @@ from exceptions import SerializationError, DeserializationError
 # Global Variables Go Here
 NUMBER_OF_STRINGS = 10
 
+MAX_NEST = 2
 MAX_INPUT_SIZE = 20
 MAX_KEY_SIZE = 10
 MAX_VALUE_SIZE = 10
@@ -70,6 +71,8 @@ ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the
 
 
 def main():
+    global nest_cnt
+    nest_cnt = 0
     print('Testing on', len(marshal_implementation_container), 'files')
     # Create random inputs
     input_strings = generateStrings('random', NUMBER_OF_STRINGS)
@@ -82,6 +85,7 @@ def main():
         response_dict[j] = {'pass':0}
         for k in range(len(input_strings)):                                     # Tries every generated string on current implementation
             try:
+                nest_cnt = 0
                 marshal_implementation_container[j](input_strings[k])
                 response_dict[j]['pass'] = response_dict[j].get('pass') + 1    
             except:
@@ -119,6 +123,7 @@ def generateStrings(_method, _length):
 #------------CARLO's Imp---------------
 #given already created keys and values, creates either an unmarshalled or marshalled map.
 def __make_map(valid = True, map_size = random.randint(1, MAX_MAP_SIZE)):
+    global nest_cnt
     r = map_size
     if map_size <= 0:
         return ({},{})
@@ -131,6 +136,10 @@ def __make_map(valid = True, map_size = random.randint(1, MAX_MAP_SIZE)):
         for i in range(map_size):
             key = __make_key(valid = True)
             choice = random.randint(0,2)
+            if (choice == 2 and nest_cnt >= MAX_NEST):
+                # If we have reached max map nesting limit generate a string instead
+                choice = 1
+                print ("Max cnt reached")
             # Make an int
             if choice == 0:
                 val = __nosj_int(valid = True)
@@ -147,6 +156,8 @@ def __make_map(valid = True, map_size = random.randint(1, MAX_MAP_SIZE)):
                     marshalled_map = marshalled_map + ","     
             # make a map      
             if choice == 2:
+                #map nesting
+                nest_cnt += 1
                 val = __make_map(valid = True)
                 unmarshalled_map[key] = val[0]
                 marshalled_map = marshalled_map + key + ":" + val[1]
@@ -160,22 +171,11 @@ def __make_map(valid = True, map_size = random.randint(1, MAX_MAP_SIZE)):
         for i in range(map_size):
             key = __make_key(valid = False)
             choice = random.randint(0,2)
-            # Make an int
-            if choice == 0:
-                val = __nosj_int(valid = False)
-                unmarshalled_map[key] = val[0]
-                marshalled_map = marshalled_map + key + ":" + val[1]
-                if i != map_size:
-                    marshalled_map = marshalled_map + ","
-            # Make a str
-            if choice == 1:
-                val = __nosj_string(valid = False)
-                unmarshalled_map[key] = val[0]
-                marshalled_map = marshalled_map + key + ":" + val[1]
-                if i != map_size:
-                    marshalled_map = marshalled_map + ","   
-            # Make a map        
-            if choice == 2:
+            if (choice == 2 and nest_cnt >= MAX_NEST):
+                # If we have reached max map nesting limit generate a string instead
+                choice = 1
+                print ("Max cnt reached")
+
                 more_invalids = (random.randint(0,1) == 1)
                 val = __make_map(valid = more_invalids, map_size = r - 1)
                 unmarshalled_map[key] = val[0]
