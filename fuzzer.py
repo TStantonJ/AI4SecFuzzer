@@ -73,7 +73,7 @@ ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the
 def main():
     global nest_cnt
     nest_cnt = 0
-    print('Testing on', len(marshal_implementation_container), 'files')
+    print('Testing on', len(unmarshal_implementation_container), 'files')
     # Create random inputs
     input_strings = generateStrings('random', NUMBER_OF_STRINGS)
     for i in range(len(input_strings)):
@@ -81,15 +81,15 @@ def main():
 
     # Apply list of generated strings to each implementation and log responses
     response_dict = {}
-    for j in range(len(marshal_implementation_container)):                      # Itterates through every implementation present
+    for j in range(len(unmarshal_implementation_container)):                      # Itterates through every implementation present
         response_dict[j] = {'pass':0}
         for k in range(len(input_strings)):                                     # Tries every generated string on current implementation
             try:
                 nest_cnt = 0
-                marshal_implementation_container[j](input_strings[k])
+                unmarshal_implementation_container[j](input_strings[k])
                 response_dict[j]['pass'] = response_dict[j].get('pass') + 1    
             except:
-                e = sys.exc_info()[1]
+                e = sys.exc_info()[0]
                 e = str(e)
                 if response_dict[j].get(e) is not None:
                     response_dict[j][e] = response_dict[j].get(e) + 1
@@ -111,9 +111,9 @@ def generateStrings(_method, _length):
             # Stocastically pick either a proper nosj string(0-0.5) or random string(0.5-1)
             validity = random.uniform(0,1)
             if validity < 0.5:
-                ret_strings.append(__make_map(valid=True)[0])
+                ret_strings.append(__make_map(valid=True)[1])
             else:
-                ret_strings.append(__make_map(valid=False)[0])
+                ret_strings.append(__make_map(valid=False)[1])
         return ret_strings
     else:
         print('Invalid generation method')
