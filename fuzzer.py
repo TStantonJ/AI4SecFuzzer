@@ -14,7 +14,8 @@ from os import path
 import random
 
 #TODO:
-# Add (de)serialization2 (TS)
+# New matrix recording system (TS)
+# Implement matrix output
 # Add stocastic chance to pick incorrect value in string and int functions(CB)
 # Add global configuration values for error_chance, recursion depth limit
 # Move error chance from generate_strings to its sub functions
@@ -97,7 +98,11 @@ def main():
                     response_dict[j][e] = 1
                 continue
     
-    # Print results of run
+
+    # ---- Format result dictonarys into a matrix and print ---
+
+
+    # Debug print results of run
     print('\nResults:')
     for l in response_dict:
         print('Result of Implementation:',l)
