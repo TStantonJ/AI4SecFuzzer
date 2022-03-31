@@ -14,7 +14,7 @@ def __unmarshal_string(marshalled_string):
     else:
         #Strips simple string s tag
         if not marshalled_string.endswith("s"):
-            raise DeserializationError("Invalid String Format:" + marshalled_string)
+            raise DeserializationError("Invalid String Format:")
         ret = marshalled_string[:-1] 
         return ret
 
@@ -63,7 +63,7 @@ def __validate_balance(marshalled_map):
     for char in marshalled_map:
         if char in wrong_braces:
             #Invalid format error
-            raise DeserializationError("Wrong format. Expected either { or }, got: " + char )
+            raise DeserializationError("Wrong format. Expected either { or }, got: ")
         if char == "{":
             bracket_stack.append(char)
         elif char == "}":
