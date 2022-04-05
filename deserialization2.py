@@ -117,13 +117,13 @@ def __unmarshal_string(marshalled_string):
     #Validate for string rules. If complex call the process_complex method to process
     if __isprintable(tmp_str):
         if tmp_str.find(',') >=0 or tmp_str.find('{') >= 0 or tmp_str.find('}') >= 0:
-            raise DeserializationError("Invalid char ({ or } or ,) found when processing "+marshalled_string)
+            raise DeserializationError("Invalid char ({ or } or ,) found when processing ")
         if tmp_str.find('%') >= 0: 
             ret = __process_complex(tmp_str)
         else:
             ret = tmp_str[:len(tmp_str)-1]
     else:
-        raise DeserializationError("Invalid char found. Can only be ASCII printable (except { } ,) or % encoded, when processing "+marshalled_string)
+        raise DeserializationError("Invalid char found. Can only be ASCII printable (except { } ,) or % encoded, when processing ")
 
     return ret
 

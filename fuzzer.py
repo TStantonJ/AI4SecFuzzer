@@ -2,16 +2,18 @@
 YOU MAY CHANGE THIS FILE IN ANY WAY YOU SEE FIT.
 """
 import base64
+from curses import A_ALTCHARSET
 from pickletools import markobject
 import random
 import argparse
 import sys
 import string
 import urllib.parse
-
 import os.path
 from os import path
 import random
+
+import preprocessor
 
 #TODO:
 # New matrix recording system (TS)
@@ -74,6 +76,7 @@ ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the
 def main():
     global nest_cnt
     nest_cnt = 0
+    unmarshal_implementation_container = preprocessor.import_files()
     print('Testing on', len(unmarshal_implementation_container), 'files')
     # Create random inputs
     input_strings = generateStrings('random', NUMBER_OF_STRINGS)
