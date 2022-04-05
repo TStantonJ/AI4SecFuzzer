@@ -4,14 +4,19 @@ import importlib
 
 def import_files():
     functions = []
-    folder = './implementations'
+    folder = 'implementations.'
 
     for dirname, dirs, files in os.walk(folder):
         for filename in files:
             filename_without_extension, extension = os.path.splitext(filename)
+            
             if extension == '.py':
-                holder = importlib.import_module('implementations',os.path.join(dirname, filename))
-                functions.append(holder)
+                if filename_without_extension == '__init__':
+                    pass
+                else:
+                    #holder = importlib.import_module(os.path.join(dirname, filename))
+                    holder = importlib.import_module('implementations.AA/deserialization')
+                    functions.append(holder)
     print(functions)
     return functions
 
