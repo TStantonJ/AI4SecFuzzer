@@ -1,38 +1,6 @@
 from exceptions import DeserializationError
 import urllib.parse
 
-def __isprintablech(x):
-    #is it an ASCII printable char
-    symbols=" \"!#$%&'()*+,-./:;<=>?@[]^_`{|}~\\"
-    if x[0] in symbols:
-        return True
-    if ord(x) >= ord('A') and ord(x) <= ord('Z'):
-       return True
-    if ord(x) >= ord('a') and ord(x) <= ord('z'):
-       return True
-    if ord(x) >= ord('0') and ord(x) <= ord('9'):
-       return True
-    return False
-
-def __isprintable(st):
-    #is it a ASCII printable string
-    cnt = 0
-    while cnt < len(st):
-        if __isprintablech(st[cnt]) ==  False:
-          return False
-        cnt += 1
-    return True
-
-def __isalnum(c):
-    # Check if the char is alpha num
-    if ord(c) >= ord('A') and ord(c) <= ord('Z'):
-       return True
-    if ord(c) >= ord('a') and ord(c) <= ord('z'):
-       return True
-    if ord(c) >= ord('0') and ord(c) <= ord('9'):
-       return True
-    return False
-
 def __isvalid_key(key):
     valid_chars = " -_+."
     flag=True
@@ -41,7 +9,7 @@ def __isvalid_key(key):
     cnt=0
     while cnt < len(key):
         if key[cnt] not in valid_chars:
-            if not __isalnum(key[cnt]):
+            if not key[cnt].isalnum():
                 flag=False
         cnt += 1
 
@@ -103,7 +71,7 @@ def __process_complex(marshalled_string):
     if (__isvalid_encode(tmp_str)):
         return urllib.parse.unquote(tmp_str)
     else:
-        raise DeserializationError("Invalid % encoded string, when parsing ")
+        raise DeserializationError("Invalid % encoded string, when parsing "+marshalled_string)
 
 
 def __unmarshal_string(marshalled_string):
@@ -112,18 +80,18 @@ def __unmarshal_string(marshalled_string):
 
     #Check for % and for s before processing
     if tmp_str.find('%') ==  -1 and tmp_str[len(tmp_str)-1] != 's':
-            raise DeserializationError("Invalid string (doesn't end with 's' or a complex string without %, when processing ")
+            raise DeserializationError("Invalid string (doesn't end with 's' or a complex string without %, when processing "+marshalled_string)
 
     #Validate for string rules. If complex call the process_complex method to process
-    if __isprintable(tmp_str):
+    if tmp_str.isprintable():
         if tmp_str.find(',') >=0 or tmp_str.find('{') >= 0 or tmp_str.find('}') >= 0:
-            raise DeserializationError("Invalid char ({ or } or ,) found when processing ")
+            raise DeserializationError("Invalid char ({ or } or ,) found when processing "+marshalled_string)
         if tmp_str.find('%') >= 0: 
             ret = __process_complex(tmp_str)
         else:
             ret = tmp_str[:len(tmp_str)-1]
-    else:
-        raise DeserializationError("Invalid char found. Can only be ASCII printable (except { } ,) or % encoded, when processing ")
+            if len(ret) == 0:
+                raise DeserializationError("String cannot be empty, when processing "+marshalled_string)
 
     return ret
 
@@ -228,9 +196,9 @@ def __unmarshal_map(marshalled_map):
 
     # Look for {} at the end or error out if not present
     if mstr[0] != '{':
-        raise DeserializationError("Missing begin '{' when processing: ")
+        raise DeserializationError("Missing begin '{' when processing: "+marshalled_map)
     if mstr[len(mstr)-1] != '}':
-        raise DeserializationError("Missing end '}' when processing: ")
+        raise DeserializationError("Missing end '}' when processing: "+marshalled_map)
 
     #remove the { and } braces before processing
     mstr = mstr[:len(mstr)-1][1:]
@@ -246,14 +214,14 @@ def __unmarshal_map(marshalled_map):
         
         colpos = mstr.find(':',cur_pos)
         if colpos == -1:
-            raise DeserializationError("Missing ':' when processing a key value pair in: ")
+            raise DeserializationError("Missing ':' when processing a key value pair in: "+marshalled_map)
 
         if mstr[cur_pos] == ',':
             #During the second round
             cur_pos += 1
         key=mstr[cur_pos:colpos]
         if not __isvalid_key(key):
-                raise DeserializationError("Invalid Key. (only alphanum (space) - _  +  . allowed) when processin ")
+                raise DeserializationError("Invalid Key. (only alphanum (space) - _  +  . allowed) when processing '"+key+"'")
 
         cur_pos = colpos+1
     
@@ -300,7 +268,7 @@ def __unmarshal_map(marshalled_map):
                  unmarshalled_val = __unmarshal_string(tmp_val)
 
         if  len(ret) != 0 and key in ret:
-            raise DeserializationError('Duplicate key found cannot add this key second time:')
+            raise DeserializationError('Duplicate key found cannot add this key second time:'+key)
         else:
             ret[key] = unmarshalled_val
         if comma:

@@ -1,7 +1,7 @@
 from exceptions import DeserializationError
 import urllib
 from urllib.parse import unquote
-import re 
+import re
 
 
 
@@ -14,7 +14,7 @@ def __unmarshal_string(marshalled_string):
     else:
         #Strips simple string s tag
         if not marshalled_string.endswith("s"):
-            raise DeserializationError("Invalid String Format:")
+            raise DeserializationError("Invalid String Format")
         ret = marshalled_string[:-1] 
         return ret
 
@@ -38,7 +38,7 @@ def __unmarshal_map(marshalled_map):
     if __validate_balance(marshalled_map):
         return __parse_map(marshalled_map)
     else:
-        raise DeserializationError("Incorrect map formation")
+        raise DeserializationError("Incorrect map formatuio")
 
 def unmarshal(marshalled_state):
     if marshalled_state is None:
@@ -53,17 +53,12 @@ def unmarshal(marshalled_state):
 def __validate_balance(marshalled_map):
     #Since marshalled strings will have %encoded brackets except for "{","}",
     #Any other brackets will be invalid.
-
-    #Checks if map is only 1 character, invalid
-    if len(marshalled_map) < 2:
-        raise DeserializationError("Invalid map formation: string size is too short")
-
     wrong_braces = ["(",")", "[","]"]
     bracket_stack = []
     for char in marshalled_map:
         if char in wrong_braces:
             #Invalid format error
-            raise DeserializationError("Wrong format. Expected either { or }, got: ")
+            raise DeserializationError("Wrong format. Expected either { or }, got: " + char )
         if char == "{":
             bracket_stack.append(char)
         elif char == "}":
@@ -84,21 +79,10 @@ def __parse_map(map,starting_index=0):
     key = ""
     value = ""
     #Switches between key and value
-    #Value = (isKey == False)
     isKey = True
-    #variable to pass through redundant characters due to recursion. Will turn true when recursion happens.
-    #Passthrough will become false when it hits another closing bracket to renable parsing
-    passthrough = False
     for index, char in enumerate(map[starting_index+1:], start = 1):
-        if passthrough and char == "}":
-            passthrough = False
-            continue
         if char == "}":
-            #Returns ret if and only if there are only brackets left
             if __endOfMapCheck(map[index:]) and len(ret) != 0:
-                #Because all other types of entries are cleared on addition to map, any unadded key-value pairs will be added
-                if key and value != "":
-                    ret[key] = sort(value)
                 return ret
             __validate_key(key)
             ret[key] = sort(value)
@@ -106,14 +90,7 @@ def __parse_map(map,starting_index=0):
             key = ""
             value = ""
             break
-        #Makes sure the iterator ignores characters pass through by recursion
-        if passthrough:
-            continue
         if char == ",":
-            #Case for nested maps touching a comma
-            if value == "" or value == " ":
-                
-                continue
             __validate_key(key)
             ret[key] = sort(value)
             isKey = not isKey
@@ -132,9 +109,8 @@ def __parse_map(map,starting_index=0):
         else:
             if char == "{":
                 __validate_key(key)
-                ret[key] = __parse_map(map[index:])
-                passthrough = True
-                key =""
+                ret[key] = __parse_map(map,index)
+                key = ""
                 value =""
                 isKey = not isKey
                 continue
@@ -180,11 +156,3 @@ def __endOfMapCheck(string):
     if len(string) == 0:
         return True
     return not pattern.search(string)
-
-def __validateMap(string):
-    #Regex for nosj map pattern
-    if type(string) != str:
-        raise DeserializationError("Unmarshalled map is not a string")
-    elif string == "{}":
-        return True
-    pattern = re.compile("")

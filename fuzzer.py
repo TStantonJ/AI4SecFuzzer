@@ -61,12 +61,12 @@ from exceptions import SerializationError, DeserializationError
 
     
 # Global Variables Go Here
-NUMBER_OF_STRINGS = 10
+NUMBER_OF_STRINGS = 100000
 
-MAX_NEST = 2
-MAX_INPUT_SIZE = 20
-MAX_KEY_SIZE = 10
-MAX_VALUE_SIZE = 10
+MAX_NEST = 90
+MAX_INPUT_SIZE = 200
+MAX_KEY_SIZE = 100
+MAX_VALUE_SIZE = 100
 MAX_MAP_SIZE = 3
 #Error chance is the chances out of 10 that an error will occur. Used to determine an error in all aspects of the map.
 ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the function
@@ -76,12 +76,22 @@ ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the
 def main():
     global nest_cnt
     nest_cnt = 0
-    unmarshal_implementation_container = preprocessor.import_files()
+    #unmarshal_implementation_container = preprocessor.import_files()
     print('Testing on', len(unmarshal_implementation_container), 'files')
     # Create random inputs
     input_strings = generateStrings('random', NUMBER_OF_STRINGS)
+
+    '''
+    tmp = '{A:'
+    for i in range(10000):
+        tmp += ' {A: A},'
+    tmp += '{A: A}}'
+    '''
+
+    #input_strings.append(tmp)
     for i in range(len(input_strings)):
-        print('Input',i,': ',input_strings[i])
+        #print('Input',i,': ',input_strings[i])
+        pass
 
     # Apply list of generated strings to each implementation and log responses
     response_dict = {}
@@ -99,6 +109,7 @@ def main():
                     response_dict[j][e] = response_dict[j].get(e) + 1
                 else:
                     response_dict[j][e] = 1
+                    print(input_strings[k],e)
                 continue
     
 
@@ -118,7 +129,7 @@ def generateStrings(_method, _length):
         for i in range(_length):
             # Stocastically pick either a proper nosj string(0-0.5) or random string(0.5-1)
             validity = random.uniform(0,1)
-            if validity < 0.5:
+            if validity < 0.8:
                 ret_strings.append(__make_map(valid=True)[1])
             else:
                 ret_strings.append(__make_map(valid=False)[1])
@@ -147,7 +158,7 @@ def __make_map(valid = True, map_size = random.randint(1, MAX_MAP_SIZE)):
             if (choice == 2 and nest_cnt >= MAX_NEST):
                 # If we have reached max map nesting limit generate a string instead
                 choice = 1
-                print ("Max cnt reached")
+                #print ("Max cnt reached")
             # Make an int
             if choice == 0:
                 val = __nosj_int(valid = True)
@@ -182,7 +193,7 @@ def __make_map(valid = True, map_size = random.randint(1, MAX_MAP_SIZE)):
             if (choice == 2 and nest_cnt >= MAX_NEST):
                 # If we have reached max map nesting limit generate a string instead
                 choice = 1
-                print ("Max cnt reached")
+                #print ("Max cnt reached")
 
                 more_invalids = (random.randint(0,1) == 1)
                 val = __make_map(valid = more_invalids, map_size = r - 1)
