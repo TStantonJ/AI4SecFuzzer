@@ -12,6 +12,7 @@ import urllib.parse
 import os.path
 from os import path
 import random
+import importlib
 
 import preprocessor
 
@@ -26,36 +27,18 @@ import preprocessor
 # Import the given implementations
 marshal_implementation_container = []
 unmarshal_implementation_container = []
-if path.exists('serialization1.py') and path.exists('deserialization1.py'):
-    from serialization1 import marshal as m1                                    #type:ignore
-    from deserialization1 import unmarshal as um1                               #type:ignore
-    unmarshal_implementation_container.append(um1)
-    marshal_implementation_container.append(m1)
-if path.exists('serialization2.py') and path.exists('deserialization2.py'):
-    from serialization2 import marshal as m2                                    #type:ignore
-    from deserialization2 import unmarshal as um2                               #type:ignore
-    unmarshal_implementation_container.append(um2)
-    marshal_implementation_container.append(m2)
-if path.exists('serialization3.py') and path.exists('deserialization3.py'):
-    from serialization3 import marshal as m3                                    #type:ignore
-    from deserialization3 import unmarshal as um3                               #type:ignore
-    unmarshal_implementation_container.append(um3)
-    marshal_implementation_container.append(m3)
-if path.exists('serialization4.py') and path.exists('deserialization4.py'):
-    from serialization4 import marshal as m4                                    #type:ignore
-    from deserialization4 import unmarshal as um4                               #type:ignore
-    unmarshal_implementation_container.append(um4)
-    marshal_implementation_container.append(m4)
-if path.exists('serialization5.py') and path.exists('deserialization5.py'):
-    from serialization5 import marshal as m5                                    #type:ignore
-    from deserialization5 import unmarshal as um5                               #type:ignore
-    unmarshal_implementation_container.append(um5)
-    marshal_implementation_container.append(m5)
-if path.exists('serialization6.py') and path.exists('deserialization6.py'):
-    from serialization6 import marshal as m6                                    #type:ignore
-    from deserialization6 import unmarshal as um6                               #type:ignore
-    unmarshal_implementation_container.append(um6)
-    marshal_implementation_container.append(m6)
+files = os.listdir("./runFiles")
+# #print(files)
+for file in files:
+    tmp = 'runFiles.'+ file.replace('.py','')
+    if file.startswith("deserialization"):
+        print(tmp)
+        try:
+            module = importlib.import_module(str(tmp))
+            unmarshal_implementation_container.append(module.unmarshal)
+        except:
+            continue
+        
 
 from exceptions import SerializationError, DeserializationError
 
@@ -73,13 +56,18 @@ ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the
 
 
 
-def main():
+def main(directory = './runFiles'):
     global nest_cnt
     nest_cnt = 0
     #unmarshal_implementation_container = preprocessor.import_files()
     print('Testing on', len(unmarshal_implementation_container), 'files')
     # Create random inputs
     input_strings = generateStrings('random', NUMBER_OF_STRINGS)
+
+    filesTested = 0
+    sortedFiles = sorted((f for f in os.listdir(directory) if not f.startswith(".")), key=str.lower)
+    for file in sortedFiles:
+        pass
 
     '''
     tmp = '{A:'
