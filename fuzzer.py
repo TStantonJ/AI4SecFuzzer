@@ -23,6 +23,11 @@ import preprocessor
 # Move error chance from generate_strings to its sub functions
 # Add recusion depth limit _make_map(CT)
 
+# Save best strings per run over 30 runs
+# Implement run system
+# Do a average fitness per run over ru
+
+
 # Import the given implementations
 marshal_implementation_container = []
 unmarshal_implementation_container = []
@@ -43,6 +48,9 @@ from exceptions import SerializationError, DeserializationError
 
     
 # Global Variables Go Here
+
+
+
 NUMBER_OF_STRINGS = 10
 
 MAX_NEST = 90
@@ -60,7 +68,7 @@ def main(directory = './runFiles'):
     nest_cnt = 0
     response_enum_list = ['Pass']
     #unmarshal_implementation_container = preprocessor.import_files()
-    print('Testing on', len(unmarshal_implementation_container), 'files')
+    #print('Testing on', len(unmarshal_implementation_container), 'files')
     # Create random inputs
     input_strings = generateStrings('random', NUMBER_OF_STRINGS)
 
@@ -124,6 +132,8 @@ def main(directory = './runFiles'):
                     data_out.write('\t\t-')
         data_out.write('\n')
     data_out.close()
+
+    return fitness
 
 def getFitness(_input_dict,_possible_errors):
     fitness = 0
