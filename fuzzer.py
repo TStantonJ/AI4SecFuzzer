@@ -18,7 +18,6 @@ import preprocessor
 
 #TODO:
 # New matrix recording system (TS)
-# Implement matrix output
 # Add stocastic chance to pick incorrect value in string and int functions(CB)
 # Add global configuration values for error_chance, recursion depth limit
 # Move error chance from generate_strings to its sub functions
@@ -44,7 +43,7 @@ from exceptions import SerializationError, DeserializationError
 
     
 # Global Variables Go Here
-NUMBER_OF_STRINGS = 100000
+NUMBER_OF_STRINGS = 10
 
 MAX_NEST = 90
 MAX_INPUT_SIZE = 200
@@ -59,27 +58,12 @@ ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the
 def main(directory = './runFiles'):
     global nest_cnt
     nest_cnt = 0
+    response_enum_list = ['Pass']
     #unmarshal_implementation_container = preprocessor.import_files()
     print('Testing on', len(unmarshal_implementation_container), 'files')
     # Create random inputs
     input_strings = generateStrings('random', NUMBER_OF_STRINGS)
 
-    filesTested = 0
-    sortedFiles = sorted((f for f in os.listdir(directory) if not f.startswith(".")), key=str.lower)
-    for file in sortedFiles:
-        pass
-
-    '''
-    tmp = '{A:'
-    for i in range(10000):
-        tmp += ' {A: A},'
-    tmp += '{A: A}}'
-    '''
-
-    #input_strings.append(tmp)
-    for i in range(len(input_strings)):
-        #print('Input',i,': ',input_strings[i])
-        pass
 
     # Apply list of generated strings to each implementation and log responses
     response_dict = {}
@@ -93,22 +77,64 @@ def main(directory = './runFiles'):
             except:
                 e = sys.exc_info()[0]
                 e = str(e)
-                if response_dict[j].get(e) is not None:
+                if e == '<class \'exceptions.DeserializationError\'>':
+                    pass
+                elif response_dict[j].get(e) is not None:                
                     response_dict[j][e] = response_dict[j].get(e) + 1
                 else:
                     response_dict[j][e] = 1
-                    print(input_strings[k],e)
+                    #print(input_strings[k],e)
+                    if e not in response_enum_list:
+                        response_enum_list.append(e)
                 continue
     
 
-    # ---- Format result dictonarys into a matrix and print ---
-
+    # ---- Get fitess, Format result dictonarys into a matrix, and print ---
+    fitness = getFitness(response_dict,response_enum_list)
 
     # Debug print results of run
-    print('\nResults:')
+    data_out = open('./results.txt', 'w')
+    # Header
+    data_out.write('Results:\n')
+    data_out.write('Fitness: ')
+    data_out.write(str(fitness))       #Score results
+    data_out.write('\n')
+    data_out.write('Column Number:\t Error Code:\n')
+    for i in range(len(response_enum_list)):
+        data_out.write(str(i))
+        data_out.write('\t\t\t\t\t')
+        data_out.write(response_enum_list[i])
+        data_out.write('\n')
+    data_out.write('\n')
+
+    # Information Body
+    data_out.write('File #:')
+    for i in range(len(response_enum_list)):
+        data_out.write('\t\t')
+        data_out.write(str(i))
+    data_out.write('\n')
     for l in response_dict:
-        print('Result of Implementation:',l)
-        print(response_dict[l])
+        data_out.write('\t')
+        data_out.write(str(l))
+        for i in response_enum_list:
+            if response_dict[l].get(i) != None:
+                data_out.write('\t\t')
+                data_out.write(str(response_dict[l].get(i)))
+            else:
+                    data_out.write('\t\t-')
+        data_out.write('\n')
+    data_out.close()
+
+def getFitness(_input_dict,_possible_errors):
+    fitness = 0
+    possible_score = 0
+    real_score = 0
+    for row in _input_dict:
+        for column in _possible_errors:
+            possible_score += 1
+            if _input_dict[row].get(column) != None:
+                real_score += 1
+    return (real_score/possible_score)*100
 
 # Function that builds a list of input strings
 def generateStrings(_method, _length):
