@@ -73,7 +73,7 @@ def main(directory = './runFiles'):
     response_dict = {}
     for j in range(len(unmarshal_implementation_container)):                      # Itterates through every implementation present
         response_dict[j] = {'pass':0}
-        print('Testing on:', j,end="\r")
+        print('Testing on implementation:', j,end="\r")
         #time.sleep(0.01)
         for k in range(len(input_strings)):                                     # Tries every generated string on current implementation
             blockPrint() #disable implementations from printing info
