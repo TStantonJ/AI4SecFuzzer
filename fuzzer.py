@@ -15,6 +15,8 @@ import random
 import importlib
 from exceptions import SerializationError, DeserializationError
 import preprocessor
+import sys
+import time
 
 # TODO:
 # New matrix recording system (TS)
@@ -71,7 +73,8 @@ def main(directory = './runFiles'):
     response_dict = {}
     for j in range(len(unmarshal_implementation_container)):                      # Itterates through every implementation present
         response_dict[j] = {'pass':0}
-        print('Testing on:', j)
+        print('Testing on:', j,end="\r")
+        #time.sleep(0.01)
         for k in range(len(input_strings)):                                     # Tries every generated string on current implementation
             blockPrint() #disable implementations from printing info
             try:
@@ -97,7 +100,7 @@ def main(directory = './runFiles'):
                         response_enum_list.append(e)
                 continue
             
-                enablePrint()   # Reenable print for debug
+            enablePrint()   # Reenable print for debug
     
 
     # ---- Get fitess, Format result dictonarys into a matrix, and print ---

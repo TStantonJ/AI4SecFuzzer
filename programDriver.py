@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 NUMBER_OF_EVALS  = 300
-NUMBER_OF_RUNS = 30
+NUMBER_OF_RUNS = 2
 
 best_run_holder = []        # Holds list of best_eval_holders
 general_run_holder = []     # Holds list of results of each eval per run
@@ -12,6 +12,7 @@ best_run_fitness = 0
 best_run = []
 # Collect 30 runs of data
 for run in range(NUMBER_OF_RUNS):
+    print('Starting Run Series')
     best_eval_holder = []           # Holds best eval log
     general_eval_holder = []        # Hold results of each eval
     best_eval = 0                   # Hold best eval total
