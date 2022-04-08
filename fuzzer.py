@@ -14,7 +14,7 @@ from os import path
 import random
 import importlib
 from func_timeout import func_timeout, FunctionTimedOut
-
+from exceptions import SerializationError, DeserializationError
 import preprocessor
 
 #TODO:
@@ -28,7 +28,7 @@ import preprocessor
 # Implement run system
 # Do a average fitness per run over ru
 
-
+# ----------- Prep files ------------
 # Import the given implementations
 marshal_implementation_container = []
 unmarshal_implementation_container = []
@@ -45,15 +45,9 @@ for file in files:
             continue
         
 
-from exceptions import SerializationError, DeserializationError
-
     
 # Global Variables Go Here
-
-
-
 NUMBER_OF_STRINGS = 10
-
 MAX_NEST = 90
 MAX_INPUT_SIZE = 200
 MAX_KEY_SIZE = 100
@@ -63,7 +57,7 @@ MAX_MAP_SIZE = 3
 ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the function
 
 
-
+#------------ Main control ------------
 def main(directory = './runFiles'):
     global nest_cnt
     nest_cnt = 0
