@@ -13,11 +13,10 @@ import os.path
 from os import path
 import random
 import importlib
-from func_timeout import func_timeout, FunctionTimedOut
 from exceptions import SerializationError, DeserializationError
 import preprocessor
 
-#TODO:
+# TODO:
 # New matrix recording system (TS)
 # Add stocastic chance to pick incorrect value in string and int functions(CB)
 # Add global configuration values for error_chance, recursion depth limit
@@ -37,7 +36,7 @@ files = os.listdir("./runFiles")
 for file in files:
     tmp = 'runFiles.'+ file.replace('.py','')
     if file.startswith("deserialization"):
-        print(tmp)
+        #print(tmp)
         try:
             module = importlib.import_module(str(tmp))
             unmarshal_implementation_container.append(module.unmarshal)
@@ -72,12 +71,16 @@ def main(directory = './runFiles'):
     response_dict = {}
     for j in range(len(unmarshal_implementation_container)):                      # Itterates through every implementation present
         response_dict[j] = {'pass':0}
+        print('Testing on:', j)
         for k in range(len(input_strings)):                                     # Tries every generated string on current implementation
+            blockPrint() #disable implementations from printing info
             try:
                 nest_cnt = 0
-                func_timeout(5,unmarshal_implementation_container[j](input_strings[k]))         # Timeout function to catch hangs over 5 sec.
+                unmarshal_implementation_container[j](input_strings[k])
                 response_dict[j]['pass'] = response_dict[j].get('pass') + 1    
+
             except:
+                enablePrint()   # Reenable print for debug
                 e = sys.exc_info()[0]
                 e = str(e)
                 # Deserialization counts a pass
@@ -93,6 +96,8 @@ def main(directory = './runFiles'):
                     if e not in response_enum_list:
                         response_enum_list.append(e)
                 continue
+            
+                enablePrint()   # Reenable print for debug
     
 
     # ---- Get fitess, Format result dictonarys into a matrix, and print ---
@@ -337,6 +342,12 @@ def __make_key(valid = True):
             generated_string = generated_string + (valid_characters[random.randint(0,len(valid_characters) - 1)])
         return "".join([random.choice(generated_string) for n in range(key_size)])
 
+# Disable print
+def blockPrint():
+    sys.stdout = open(os.devnull, 'w')
+# Restore print
+def enablePrint():
+    sys.stdout = sys.__stdout__
 
 
 if __name__ == '__main__':

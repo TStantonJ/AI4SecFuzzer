@@ -4,33 +4,42 @@ import matplotlib.pyplot as plt
 
 
 NUMBER_OF_EVALS  = 300
-NUMBER_OF_RUNS = 1
+NUMBER_OF_RUNS = 2
 
-run_holder = []
+best_run_holder = []
+general_run_holder = []
 best_fitness = 0
 # Collect 30 runs of data
 for run in range(NUMBER_OF_RUNS):
-    eval_holder = []
+    best_eval_holder = []
+    general_eval_holder = []
     best_eval = 0
 
     # Collect 30 evals of data per run
     for eval in range(NUMBER_OF_EVALS):
+        # Run fuzzer
         result = fuzz()
+        # Update best eval so far
         if result >= best_eval:
             best_eval = result
-        eval_holder.append(best_eval)
+        best_eval_holder.append(best_eval)
+        # Add eval to data from this run
+        general_eval_holder.append(result)
 
-    # Add last run to the others
-    run_holder.append(eval_holder)
+    # Check if last run is better than current best run
     if best_eval >= best_fitness:
         best_fitness = best_eval
-    
-    #Plot resutls of run
+        best_run_holder.append(best_eval_holder)
+    # Add last run to run storage
+    general_run_holder.append(general_eval_holder)
+
+#Plot resutls of all runs
+for run in general_run_holder:
     xpoints = range(NUMBER_OF_EVALS)
-    ypoints = eval_holder
-    
+    ypoints = general_run_holder[run]
     plt.plot(xpoints, ypoints)
-    plt.show()
+
+plt.show()
 
 print('Best Fitness:', best_fitness)
-print(run_holder)
+print(best_run_holder)
