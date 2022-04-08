@@ -13,6 +13,7 @@ import os.path
 from os import path
 import random
 import importlib
+from func_timeout import func_timeout, FunctionTimedOut
 
 import preprocessor
 
@@ -80,15 +81,18 @@ def main(directory = './runFiles'):
         for k in range(len(input_strings)):                                     # Tries every generated string on current implementation
             try:
                 nest_cnt = 0
-                unmarshal_implementation_container[j](input_strings[k])
+                func_timeout(5,unmarshal_implementation_container[j](input_strings[k]))         # Timeout function to catch hangs over 5 sec.
                 response_dict[j]['pass'] = response_dict[j].get('pass') + 1    
             except:
                 e = sys.exc_info()[0]
                 e = str(e)
+                # Deserialization counts a pass
                 if e == '<class \'exceptions.DeserializationError\'>':
                     pass
+                # Incremenet exeception if already counted
                 elif response_dict[j].get(e) is not None:                
                     response_dict[j][e] = response_dict[j].get(e) + 1
+                # Add excepetion to dict
                 else:
                     response_dict[j][e] = 1
                     #print(input_strings[k],e)
