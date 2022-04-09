@@ -7,9 +7,10 @@ import time
 import statistics
 import numpy as np
 
-
+# Define runs and evals/run
+NUMBER_OF_RUNS = 30
 NUMBER_OF_EVALS  = 30
-NUMBER_OF_RUNS = 5
+
 
 best_run_holder = []        # Holds list of best_eval_holders
 general_run_holder = []     # Holds list of results of each eval per run
@@ -17,7 +18,7 @@ best_run_fitness = 0
 best_run = []
 # Collect 30 runs of data
 for run in range(NUMBER_OF_RUNS):
-    time.sleep(0.1)
+    time.sleep(0.01)
     print('Starting Run Series:',run)
     best_eval_holder = []           # Holds best eval log
     general_eval_holder = []        # Hold results of each eval
@@ -49,7 +50,7 @@ for run in range(NUMBER_OF_RUNS):
 
 #Plot resutls of all runs
 
-# Graph of best fitness seen by eval for all runs
+# (regular one)Graph of best fitness seen by eval for all runs
 for run in best_run_holder:
     bestxpoints = range(NUMBER_OF_EVALS)
     bestypoints = run

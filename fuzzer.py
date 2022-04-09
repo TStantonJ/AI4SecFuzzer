@@ -20,14 +20,12 @@ import time
 
 # TODO:
 # New matrix recording system (TS)
-# Add stocastic chance to pick incorrect value in string and int functions(CB)
-# Add global configuration values for error_chance, recursion depth limit
-# Move error chance from generate_strings to its sub functions
-# Add recusion depth limit _make_map(CT)
-
-# Save best strings per run over 30 runs
-# Implement run system
-# Do a average fitness per run over ru
+#   - Add indvidual matricies to results.txt
+# Time out function
+# Change way results.txt(Maybe pass back dictionary and make results in programDriver)
+# results.txt needs to store its best strings
+# Change random generated string to be more complex
+# New fitness
 
 # ----------- Prep files ------------
 # Import the given implementations
@@ -48,7 +46,7 @@ for file in files:
 
     
 # Global Variables Go Here
-NUMBER_OF_STRINGS = 10
+NUMBER_OF_STRINGS = 1000
 MAX_NEST = 90
 MAX_INPUT_SIZE = 200
 MAX_KEY_SIZE = 100
@@ -79,6 +77,8 @@ def main(directory = './runFiles'):
             blockPrint() #disable implementations from printing info
             try:
                 nest_cnt = 0
+                if j == 9:
+                    continue
                 unmarshal_implementation_container[j](input_strings[k])
                 response_dict[j]['pass'] = response_dict[j].get('pass') + 1    
 
@@ -136,6 +136,10 @@ def main(directory = './runFiles'):
                 data_out.write(str(response_dict[l].get(i)))
             else:
                     data_out.write('\t\t-')
+        data_out.write('\n')
+    data_out.write('\nStrings used:\n')
+    for string in input_strings:
+        data_out.write(string)
         data_out.write('\n')
     data_out.close()
 
