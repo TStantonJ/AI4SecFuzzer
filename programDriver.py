@@ -14,7 +14,7 @@ NUMBER_OF_EVALS  = 30
 
 best_run_holder = []        # Holds list of best_eval_holders
 general_run_holder = []     # Holds list of results of each eval per run
-best_run_fitness = 0
+best_run_fitness = 0.00
 best_run = []
 best_run_info = ''
 
@@ -24,7 +24,7 @@ for run in range(NUMBER_OF_RUNS):
     print('Starting Run Series:',run)
     best_eval_holder = []           # Holds best eval log
     general_eval_holder = []        # Hold results of each eval
-    best_eval = 0                   # Hold best eval total
+    best_eval = 0.00                # Hold best eval total
     best_eval_info = ''             # Hold run and eval num of best
 
     # Collect NUMBER_OF_EVALS evals of data per run
@@ -34,7 +34,7 @@ for run in range(NUMBER_OF_RUNS):
         time.sleep(0.001)
         result = fuzz(_runNum=run,_evalNum=eval)
         # Update best eval so far
-        if result >= best_eval:
+        if float(result) > float(best_eval):
             best_eval = result
             best_eval_info = str(run) + '__' + str(eval)
         best_eval_holder.append(best_eval)
@@ -43,7 +43,7 @@ for run in range(NUMBER_OF_RUNS):
     print('\n')
 
     # Check if last run is better than current best run
-    if best_eval >= best_run_fitness:
+    if float(best_eval) > float(best_run_fitness):
         best_fitness = best_eval
         best_run = best_eval_holder
         best_run_info = best_eval_info
@@ -54,16 +54,22 @@ for run in range(NUMBER_OF_RUNS):
 
 
 #Plot resutls of all runs
+print('Best Fitness:', best_fitness)
+#print(best_run_holder)
+print('Best Location:', best_run_info)
 
-# (regular one)Graph of best fitness seen by eval for every runs
+# Graph of best fitness seen by eval for every runs
 for run in best_run_holder:
     bestxpoints = range(NUMBER_OF_EVALS)
     bestypoints = run
     plt.plot(bestxpoints, bestypoints)
+fig1 = plt.figure()
 
 # Best Graph
 overallbestxpoint = range(NUMBER_OF_EVALS)
 overallbestypoint = best_run
+plt.plot(overallbestxpoint,overallbestypoint)
+fig2 = plt.figure()
 
 # Box plot graph
 data_holder = []
@@ -77,6 +83,4 @@ ax.boxplot(data_holder)
 # Show graphs
 plt.show()
 
-print('Best Fitness:', best_fitness)
-#print(best_run_holder)
-print('Best Location:', best_run_info)
+
