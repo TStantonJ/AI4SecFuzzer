@@ -46,7 +46,7 @@ for file in files:
 
     
 # Global Variables Go Here
-NUMBER_OF_STRINGS = 1000
+NUMBER_OF_STRINGS = 10
 MAX_NEST = 90
 MAX_INPUT_SIZE = 200
 MAX_KEY_SIZE = 100
@@ -57,7 +57,7 @@ ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the
 
 
 #------------ Main control ------------
-def main(directory = './runFiles'):
+def main(_runNum, _evalNum, _outputDirectory = './runLog'):
     global nest_cnt
     nest_cnt = 0
     response_enum_list = ['Pass']
@@ -107,7 +107,8 @@ def main(directory = './runFiles'):
     fitness = getFitness(response_dict,response_enum_list)
 
     # Debug print results of run
-    data_out = open('./results.txt', 'w')
+    outputFile = _outputDirectory + '/' + str(_runNum) + '__'+ str(_evalNum) + '.txt'
+    data_out = open(outputFile, 'w')
     # Header
     data_out.write('Results:\n')
     data_out.write('Fitness: ')
