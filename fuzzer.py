@@ -46,7 +46,7 @@ for file in files:
 
     
 # Global Variables Go Here
-NUMBER_OF_STRINGS = 10
+NUMBER_OF_STRINGS = 5
 MAX_NEST = 90
 MAX_INPUT_SIZE = 200
 MAX_KEY_SIZE = 100

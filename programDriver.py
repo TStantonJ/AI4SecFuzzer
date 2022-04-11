@@ -44,7 +44,7 @@ for run in range(NUMBER_OF_RUNS):
 
     # Check if last run is better than current best run
     if float(best_eval) > float(best_run_fitness):
-        best_fitness = best_eval
+        best_run_fitness = best_eval
         best_run = best_eval_holder
         best_run_info = best_eval_info
     
@@ -54,7 +54,7 @@ for run in range(NUMBER_OF_RUNS):
 
 
 #Plot resutls of all runs
-print('Best Fitness:', best_fitness)
+print('Best Fitness:', best_run_fitness)
 #print(best_run_holder)
 print('Best Location:', best_run_info)
 
@@ -69,7 +69,6 @@ fig1 = plt.figure()
 overallbestxpoint = range(NUMBER_OF_EVALS)
 overallbestypoint = best_run
 plt.plot(overallbestxpoint,overallbestypoint)
-fig2 = plt.figure()
 
 # Box plot graph
 data_holder = []
