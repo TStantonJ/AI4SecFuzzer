@@ -56,15 +56,17 @@ ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the
 
 
 #------------ Main control ------------
-def main(_runNum = 1, _evalNum = 1, _outputDirectory = './runLog'):
+def main(_runNum = 1, _evalNum = 1, _outputDirectory = './runLog', _custom_input = None):
     global nest_cnt
     nest_cnt = 0
     response_enum_list = ['Pass']
     #unmarshal_implementation_container = preprocessor.import_files()
     #print('Testing on', len(unmarshal_implementation_container), 'files')
     # Create random inputs
-    input_strings = generateStrings('random', NUMBER_OF_STRINGS)
-
+    if _custom_input == None:
+        input_strings = _custom_input
+    else:
+        input_strings = generateStrings('random', NUMBER_OF_STRINGS)
 
     # Apply list of generated strings to each implementation and log responses
     response_dict = {}
