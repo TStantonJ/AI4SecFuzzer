@@ -14,7 +14,6 @@ from os import path
 import random
 import importlib
 from exceptions import SerializationError, DeserializationError
-import preprocessor
 import sys
 import time
 
@@ -46,7 +45,7 @@ for file in files:
 
     
 # Global Variables Go Here
-NUMBER_OF_STRINGS = 5
+NUMBER_OF_STRINGS = 20
 MAX_NEST = 90
 MAX_INPUT_SIZE = 200
 MAX_KEY_SIZE = 100
@@ -57,7 +56,7 @@ ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the
 
 
 #------------ Main control ------------
-def main(_runNum, _evalNum, _outputDirectory = './runLog'):
+def main(_runNum = 1, _evalNum = 1, _outputDirectory = './runLog'):
     global nest_cnt
     nest_cnt = 0
     response_enum_list = ['Pass']
@@ -146,6 +145,11 @@ def main(_runNum, _evalNum, _outputDirectory = './runLog'):
 
     return fitness
 
+#TODO: weights towards diversity of implements broken over total spaces filled
+# weights to smaller strings
+# set static number of exceptions
+# return total string length for tie breaker
+# possible fitness penalty for string length near or over 150
 def getFitness(_input_dict,_possible_errors):
     fitness = 0
     possible_score = 0

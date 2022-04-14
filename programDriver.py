@@ -9,7 +9,7 @@ import numpy as np
 
 # Define runs and evals/run
 NUMBER_OF_RUNS = 30
-NUMBER_OF_EVALS  = 30
+NUMBER_OF_EVALS  = 120
 
 
 best_run_holder = []        # Holds list of best_eval_holders
@@ -63,21 +63,29 @@ for run in best_run_holder:
     bestxpoints = range(NUMBER_OF_EVALS)
     bestypoints = run
     plt.plot(bestxpoints, bestypoints)
+plt.xlabel('Evaluation')
+plt.ylabel('Best Fitness Seen')
+plt.title('Best Fitness Seen Graph for all Runs')
 fig1 = plt.figure()
 
 # Best Graph
 overallbestxpoint = range(NUMBER_OF_EVALS)
 overallbestypoint = best_run
+plt.xlabel('Evaluation')
+plt.ylabel('Best Fitness Seen')
+plt.title('Best Fitness Seen Graph for Best Run')
 plt.plot(overallbestxpoint,overallbestypoint)
 
 # Box plot graph
 data_holder = []
 for eval_num in range(NUMBER_OF_EVALS):
     average_at_eval = []
-    for run in range(len(general_run_holder)):
-        average_at_eval.append(general_run_holder[run][eval_num])
+    for run in range(len(best_run_holder)):
+        average_at_eval.append(best_run_holder[run][eval_num])
     data_holder.append(average_at_eval)
 fig, ax = plt.subplots()
+ax.set_xlabel('Evaluation')
+ax.set_ylabel('Fitness Range')
 ax.boxplot(data_holder)
 # Show graphs
 plt.show()
