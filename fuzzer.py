@@ -106,7 +106,7 @@ def main(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custom_input
     
 
     # ---- Get fitess, Format result dictonarys into a matrix, and print ---
-    fitness = getFitness(response_dict,response_enum_list)
+    fitness = getFitness(response_dict)
 
     # Debug print results of run
     outputFile = _outputDirectory + '/' + str(_runNum) + '__'+ str(_evalNum) + '.txt'
@@ -153,12 +153,14 @@ def main(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custom_input
 # set static number of exceptions
 # return total string length for tie breaker
 # possible fitness penalty for string length near or over 150
-def getFitness(_input_dict,_possible_errors):
+def getFitness(_input_dict):
+    errors = ['<class \'NameError\'>', '<class \'KeyError\'>', '<class \'ValueError\'>',
+        '<class \'SyntaxError\'>', '<class \'IndexError\'>', '<class \'json.decoder.JSONDecodeError\'>', '<class \'RecursionError\'>']
     fitness = 0
     possible_score = 0
     real_score = 0
     for row in _input_dict:
-        for column in _possible_errors:
+        for column in errors:
             possible_score += 1
             if _input_dict[row].get(column) != None:
                 real_score += 1
