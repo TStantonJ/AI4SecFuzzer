@@ -20,6 +20,7 @@ import time
 # TODO:
 # New matrix recording system (TS)
 #   - Add indvidual matricies to results.txt
+# Add weight function: should we care more about number of implementations broken or exceptions cased(currently this one)
 # Time out function
 # Change way results.txt(Maybe pass back dictionary and make results in programDriver)
 # results.txt needs to store its best strings
@@ -53,17 +54,17 @@ MAX_VALUE_SIZE = 100
 MAX_MAP_SIZE = 3
 #Error chance is the chances out of 10 that an error will occur. Used to determine an error in all aspects of the map.
 ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the function
-
+global nest_cnt
+nest_cnt = 0
 
 #------------ Main control ------------
-def main(_runNum = 1, _evalNum = 1, _outputDirectory = './runLog', _custom_input = None):
-    global nest_cnt
-    nest_cnt = 0
+def main(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custom_input = None):
+    
     response_enum_list = ['Pass']
     #unmarshal_implementation_container = preprocessor.import_files()
     #print('Testing on', len(unmarshal_implementation_container), 'files')
     # Create random inputs
-    if _custom_input == None:
+    if _custom_input != None:
         input_strings = _custom_input
     else:
         input_strings = generateStrings('random', NUMBER_OF_STRINGS)
