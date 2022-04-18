@@ -153,7 +153,11 @@ def main(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custom_input
 # set static number of exceptions
 # return total string length for tie breaker
 # possible fitness penalty for string length near or over 150
-def getFitness(_input_dict):
+
+# _score_style: coverage means we count total filled matrix spaces. Diversity means we weight distribution of errors more
+def getFitness(_input_dict, _score_style = 'diverse'):
+    MAX_FITNESS_PENALTY = 0.25
+    
     errors = ['<class \'NameError\'>', '<class \'KeyError\'>', '<class \'ValueError\'>',
         '<class \'SyntaxError\'>', '<class \'IndexError\'>', '<class \'json.decoder.JSONDecodeError\'>', '<class \'RecursionError\'>']
     fitness = 0
@@ -164,7 +168,35 @@ def getFitness(_input_dict):
             possible_score += 1
             if _input_dict[row].get(column) != None:
                 real_score += 1
-    return (real_score/possible_score)*100
+    fitness = (real_score/possible_score)*100
+        
+    if _score_style == 'diversity':
+        total_errors = 0
+        # Construct new dict with error values and set their default values to 0
+        scoring_dict = {}
+        for type in errors:
+            scoring_dict[type] = 0
+        # Tally up types of errors found
+        for row in _input_dict:
+            for column in errors:
+                if _input_dict[row].get(column) != None:
+                    scoring_dict[column] += _input_dict[row].get(column)
+                    total_errors += _input_dict[row].get(column)
+        # Get diversity of implementations
+        ideal_distribution = (100/len(errors))*0.01
+        total_penalty = 0
+        for error in range(len(scoring_dict)):
+            scoring_dict[error] = scoring_dict[error]/total_errors
+            if scoring_dict[error] > ideal_distribution:
+                total_penalty += scoring_dict[error]-ideal_distribution
+            elif scoring_dict[error] < ideal_distribution:
+                total_penalty += ideal_distribution-scoring_dict[error]
+        
+        if total_penalty < MAX_FITNESS_PENALTY:
+            fitness - total_penalty
+        else:
+            fitness - MAX_FITNESS_PENALTY
+    return fitness
 
 # Function that builds a list of input strings
 def generateStrings(_method, _length):
