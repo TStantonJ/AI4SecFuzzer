@@ -1,15 +1,16 @@
 from re import L
 
 from numpy import average
-from fuzzer import main as fuzz
+import fuzzer as fuzz
+from neighborhood import findNeighbors
 import matplotlib.pyplot as plt
 import time
 import statistics
 import numpy as np
 
 # Define runs and evals/run
-NUMBER_OF_RUNS = 30
-NUMBER_OF_EVALS  = 120
+NUMBER_OF_RUNS = 1
+NUMBER_OF_EVALS  = 30
 
 
 best_run_holder = []        # Holds list of best_eval_holders
@@ -32,7 +33,10 @@ for run in range(NUMBER_OF_RUNS):
         # Run fuzzer
         print('\t\t\t\t\tCurrent Eval :',eval, end='\r')
         time.sleep(0.001)
-        result = fuzz(_runNum=run,_evalNum=eval)
+        #result = fuzz(_runNum=run,_evalNum=eval)
+        strings = fuzz.generateStrings('random', 10)
+        new_strings, neighbors, better_check = findNeighbors(1,strings)
+        result = fuzz.main(_custom_input = new_strings, _runNum=run, _evalNum=eval)
         # Update best eval so far
         if float(result) > float(best_eval):
             best_eval = result
