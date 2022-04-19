@@ -8,8 +8,8 @@ import statistics
 import numpy as np
 
 # Define runs and evals/run
-NUMBER_OF_RUNS = 30
-NUMBER_OF_EVALS  = 30
+NUMBER_OF_RUNS = 5
+NUMBER_OF_EVALS  = 5
 
 
 best_run_holder = []        # Holds list of best_eval_holders

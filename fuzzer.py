@@ -1,6 +1,4 @@
-"""
-YOU MAY CHANGE THIS FILE IN ANY WAY YOU SEE FIT.
-"""
+
 import base64
 from curses import A_ALTCHARSET
 from pickletools import markobject
@@ -14,7 +12,7 @@ from os import path
 import random
 import importlib
 from exceptions import SerializationError, DeserializationError
-import preprocessor
+# import preprocessor
 import sys
 import time
 
@@ -55,11 +53,8 @@ MAX_MAP_SIZE = 3
 #Error chance is the chances out of 10 that an error will occur. Used to determine an error in all aspects of the map.
 ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the function
 
-
 #------------ Main control ------------
 def main(_runNum, _evalNum, _outputDirectory = './runLog'):
-    global nest_cnt
-    nest_cnt = 0
     response_enum_list = ['Pass']
     #unmarshal_implementation_container = preprocessor.import_files()
     #print('Testing on', len(unmarshal_implementation_container), 'files')
@@ -69,6 +64,7 @@ def main(_runNum, _evalNum, _outputDirectory = './runLog'):
 
     # Apply list of generated strings to each implementation and log responses
     response_dict = {}
+
     for j in range(len(unmarshal_implementation_container)):                      # Itterates through every implementation present
         response_dict[j] = {'pass':0}
         print('Testing on implementation:', j,end="\r")
@@ -76,7 +72,6 @@ def main(_runNum, _evalNum, _outputDirectory = './runLog'):
         for k in range(len(input_strings)):                                     # Tries every generated string on current implementation
             blockPrint() #disable implementations from printing info
             try:
-                nest_cnt = 0
                 if j == 9:
                     continue
                 unmarshal_implementation_container[j](input_strings[k])
@@ -177,7 +172,7 @@ def generateStrings(_method, _length):
 #------------CARLO's Imp---------------
 #given already created keys and values, creates either an unmarshalled or marshalled map.
 def __make_map(valid = True, map_size = random.randint(1, MAX_MAP_SIZE)):
-    global nest_cnt
+    nest_cnt = 0
     r = map_size
     if map_size <= 0:
         return ({},{})
