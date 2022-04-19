@@ -47,10 +47,11 @@ for file in files:
     
 # Global Variables Go Here
 NUMBER_OF_STRINGS = 20
+MAX_STRING_SIZE = 150
 MAX_NEST = 90
-MAX_INPUT_SIZE = 200
-MAX_KEY_SIZE = 100
-MAX_VALUE_SIZE = 100
+MAX_INPUT_SIZE = 20
+MAX_KEY_SIZE = 10
+MAX_VALUE_SIZE = 10
 MAX_MAP_SIZE = 3
 #Error chance is the chances out of 10 that an error will occur. Used to determine an error in all aspects of the map.
 ERROR_CHANCE = 1 #Currently 1/10 chance for an error to occur in any part of the function
@@ -206,9 +207,15 @@ def generateStrings(_method, _length):
             # Stocastically pick either a proper nosj string(0-0.5) or random string(0.5-1)
             validity = random.uniform(0,1)
             if validity < 0.8:
-                ret_strings.append(__make_map(valid=True)[1])
+                new_string = __make_map(valid=True)[1]
+                while len(new_string) > MAX_STRING_SIZE:
+                    new_string = __make_map(valid=True)[1]
+                ret_strings.append(new_string)
             else:
-                ret_strings.append(__make_map(valid=False)[1])
+                new_string = __make_map(valid=False)[1]
+                while len(new_string) > MAX_STRING_SIZE:
+                    new_string = __make_map(valid=False)[1]
+                ret_strings.append(new_string)
         return ret_strings
     else:
         print('Invalid generation method')
