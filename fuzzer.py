@@ -160,7 +160,8 @@ def getFitness(_input_dict, _score_style = 'diverse'):
     MAX_FITNESS_PENALTY = 0.25
     
     errors = ['<class \'NameError\'>', '<class \'KeyError\'>', '<class \'ValueError\'>',
-        '<class \'SyntaxError\'>', '<class \'IndexError\'>', '<class \'json.decoder.JSONDecodeError\'>', '<class \'RecursionError\'>']
+        '<class \'SyntaxError\'>', '<class \'IndexError\'>', '<class \'json.decoder.JSONDecodeError\'>',
+        '<class \'RecursionError\'>',  '<class \'UnboundLocalError\'>']
     fitness = 0
     possible_score = 0
     real_score = 0
