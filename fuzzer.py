@@ -149,14 +149,14 @@ def main(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custom_input
 
     return fitness
 
-#TODO: weights towards diversity of implements broken over total spaces filled
+#TODO: weights towards diversity of implements broken over total spaces filled NEED NUMERIC values for weights
 # weights to smaller strings
 # set static number of exceptions
 # return total string length for tie breaker
 # possible fitness penalty for string length near or over 150
 
 # _score_style: coverage means we count total filled matrix spaces. Diversity means we weight distribution of errors more
-def getFitness(_input_dict, _score_style = 'diverse'):
+def getFitness(_input_dict, _score_style = 'diverse', _diversity_weight = 0, _implementation_weight = 0):
     MAX_FITNESS_PENALTY = 0.25
     
     errors = ['<class \'NameError\'>', '<class \'KeyError\'>', '<class \'ValueError\'>',
