@@ -149,56 +149,36 @@ def main(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custom_input
 
     return fitness
 
-#TODO: weights towards diversity of implements broken over total spaces filled NEED NUMERIC values for weights
-# weights to smaller strings
-# set static number of exceptions
-# return total string length for tie breaker
-# possible fitness penalty for string length near or over 150
-
-# _score_style: coverage means we count total filled matrix spaces. Diversity means we weight distribution of errors more
-def getFitness(_input_dict, _score_style = 'diverse', _diversity_weight = 0, _implementation_weight = 0):
-    MAX_FITNESS_PENALTY = 0.25
-    
+#TODO: Add fitness penalty for strings near 150 len
+# Take a result dictonary and weights for exceptions caused and implementations broken(Ideally when summed, weights = 1.0)
+# Returns fitness of given dictionary out of 100
+def getFitness(_input_dict, _exception_weight = 0.5, _implementation_weight = 0.5):
     errors = ['<class \'NameError\'>', '<class \'KeyError\'>', '<class \'ValueError\'>',
         '<class \'SyntaxError\'>', '<class \'IndexError\'>', '<class \'json.decoder.JSONDecodeError\'>',
         '<class \'RecursionError\'>',  '<class \'UnboundLocalError\'>']
-    fitness = 0
-    possible_score = 0
-    real_score = 0
+
+    # Look at number of implementations broken
+    implementation_score_list = []
+    implementations_broken = 0
     for row in _input_dict:
         for column in errors:
-            possible_score += 1
             if _input_dict[row].get(column) != None:
-                real_score += 1
-    fitness = (real_score/possible_score)*100
+                implementations_broken += 1
+    implementation_fitness =  implementations_broken/54
         
-    if _score_style == 'diversity':
-        total_errors = 0
-        # Construct new dict with error values and set their default values to 0
-        scoring_dict = {}
-        for type in errors:
-            scoring_dict[type] = 0
-        # Tally up types of errors found
-        for row in _input_dict:
-            for column in errors:
-                if _input_dict[row].get(column) != None:
-                    scoring_dict[column] += _input_dict[row].get(column)
-                    total_errors += _input_dict[row].get(column)
-        # Get diversity of implementations
-        ideal_distribution = (100/len(errors))*0.01
-        total_penalty = 0
-        for error in range(len(scoring_dict)):
-            scoring_dict[error] = scoring_dict[error]/total_errors
-            if scoring_dict[error] > ideal_distribution:
-                total_penalty += scoring_dict[error]-ideal_distribution
-            elif scoring_dict[error] < ideal_distribution:
-                total_penalty += ideal_distribution-scoring_dict[error]
-        
-        if total_penalty < MAX_FITNESS_PENALTY:
-            fitness - total_penalty
-        else:
-            fitness - MAX_FITNESS_PENALTY
-    return fitness
+    # Look at number of exception types raised
+    exception_fitness = 0
+    possible_exception_amount = 0
+    real_exception_amount = 0
+    for row in _input_dict:
+        for column in errors:
+            possible_exception_amount += 1
+            if _input_dict[row].get(column) != None:
+                real_exception_amount += 1
+    exception_fitness = real_exception_amount/possible_exception_amount
+
+    fitness = (implementation_fitness * _implementation_weight) + (exception_fitness * _exception_weight)
+    return fitness*100
 
 # Function that builds a list of input strings
 def generateStrings(_method, _length):
