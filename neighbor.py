@@ -29,7 +29,7 @@ def mutate(string):
             else:
                 generated_mutation += random.choice(random.choice(SPECIAL_CHARACTERS))
         generated_mutation+="}"
-        return string.replace(string, generated_mutation)
+        return string.replace(string[random.choice(range(0,len(string))):-1], generated_mutation)
 
     mutation_length = int(len(string) / len(nosj_set))
     choice = random.choice([0,1])
