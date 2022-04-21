@@ -155,7 +155,7 @@ def main(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custom_input
 def getFitness(_input_dict, _exception_weight = 0.5, _implementation_weight = 0.5):
     errors = ['<class \'NameError\'>', '<class \'KeyError\'>', '<class \'ValueError\'>',
         '<class \'SyntaxError\'>', '<class \'IndexError\'>', '<class \'json.decoder.JSONDecodeError\'>',
-        '<class \'RecursionError\'>',  '<class \'UnboundLocalError\'>']
+        '<class \'RecursionError\'>',  '<class \'UnboundLocalError\'>', '<class \'AttributeError\'>']
 
     # Look at number of implementations broken
     implementation_score_list = []
@@ -164,7 +164,8 @@ def getFitness(_input_dict, _exception_weight = 0.5, _implementation_weight = 0.
         for column in errors:
             if _input_dict[row].get(column) != None:
                 implementations_broken += 1
-    implementation_fitness =  implementations_broken/54
+                continue
+    implementation_fitness = implementations_broken/54
         
     # Look at number of exception types raised
     exception_fitness = 0
@@ -174,7 +175,7 @@ def getFitness(_input_dict, _exception_weight = 0.5, _implementation_weight = 0.
         for column in errors:
             possible_exception_amount += 1
             if _input_dict[row].get(column) != None:
-                real_exception_amount += 1
+                real_exception_amount += 1  
     exception_fitness = real_exception_amount/possible_exception_amount
 
     fitness = (implementation_fitness * _implementation_weight) + (exception_fitness * _exception_weight)
