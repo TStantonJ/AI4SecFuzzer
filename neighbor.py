@@ -50,6 +50,49 @@ def mutate(string):
         pass
     return  string.replace(random.choice(nosj_set), generated_mutation)
 
+#choices
+#0 general string random use Tom existing function
+#1 replace key or value of a random pair
+#3 Remove the opening { from a nosj
+#4 Remove the closing } from a nosj
+#
+def mutString(inp, ch):
+
+    if (ch == 0):
+        return mutateString(inp)
+    if (ch == 1):
+        nosj = get_nosj(inp)
+        # Randomly choose a pair from nosj list
+        pair = nosj[random.randint(0,len(nosj)-1)]
+        keypair = pair.split(':', 1)
+        key = keypair[0]
+        value = keypair[1]
+        #50% random choice of key or value
+        r = random.choice([0,1])
+        if (r == 0):
+            newkey = mutateString(key)
+            #Replace key with newkey
+
+            #This is not fool proof, What if the same apeared twice in the string.
+            return inp.replace(key, newkey)
+        else :
+            newvalue = mutateString(value)
+            return (inp.replace(value, newvalue))
+
+    # Remove {
+    if (ch == 2):
+        nosj = get_nosj(inp)
+        # Randomly choose a pair from nosj list
+        pair = nosj[random.randint(0,len(nosj)-1)]
+        #remove first char which shd be { and replace the pair
+        return inp.replace(pair, pair[1:])
+    # Remove }
+    if (ch == 3):
+        nosj = get_nosj(inp)
+        # Randomly choose a pair from nosj list
+        pair = nosj[random.randint(0,len(nosj)-1)]
+        #remove last char which shd be } and replace the pair
+        return inp.replace(pair, pair[1:-1])
 
 
 
