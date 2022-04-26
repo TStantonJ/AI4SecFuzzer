@@ -6,6 +6,7 @@ import fuzzer as fuzz
 import numpy 
 import urllib.parse
 import copy
+import fuzzer_set_class as fs
 DEFAULT_NEIGHBORS_GENERATED = 2
 DEFAULT_MUTATION_LENGTH = 10
 PERCENTS = re.findall("%..", urllib.parse.quote(string.punctuation))
@@ -21,8 +22,10 @@ def insert(string,index,ins):
             
 def Diff(li1, li2):
     return list(set(li1) - set(li2)) + list(set(li2) - set(li1))   
-#Gaussian distribution to define how many steps (mutations) to generate on a given string
 
+
+#Gaussian distribution to define how many steps (mutations) to generate on a given string
+##IMPORT THIS FUNCTION
 def mutate_set(set_of_strings, steps = 1):
     mutations = abs(int(numpy.random.normal(0,16.6)))
     temp = copy.deepcopy(set_of_strings)
@@ -34,51 +37,9 @@ def mutate_set(set_of_strings, steps = 1):
         random_list_index = random.choice(range(len(new_list)-1))
         random_string_in_list_index = random.choice(range(len(new_list[random_list_index])))
         new_list[random_list_index][random_string_in_list_index] = mutate(new_list[random_list_index][random_string_in_list_index])
-    return new_list
+    return fs.fuzzer_set(string_set = new_list)
     
 
-    
-
-#gets a string given valid nosj inside the string,
-# Recursion error/Keyerror: Ending parts of nosj strings 
-# Unbound/value error: Opening { brackets
-# Syntax Error: Captilized characters? / incomplete nosj
-def lmutate(string):
-    generated_mutation = "{"
-    nosj_set = get_nosj(string)
-    #If no 'valid' nosj in string
-    if (len(nosj_set) == 0):
-        for i in range(DEFAULT_MUTATION_LENGTH):
-            choice = random.choice([0,1])
-            if choice == 0:
-                generated_mutation += random.choice(random.choice(CHARACTER_LIST))
-            else:
-                generated_mutation += random.choice(random.choice(SPECIAL_CHARACTERS))
-        generated_mutation+="}"
-        generated_mutation = generated_mutation[:1] + ":" + generated_mutation[1:]
-        return string.replace(string[random.choice(range(0,len(string))):-1], generated_mutation)
-
-    mutation_length = int(len(string) / len(nosj_set))
-    choice = random.choice([0,1])
-
-    #General Mutation
-    if choice == 0:
-        for i in range(mutation_length):
-            generated_mutation += random.choice(random.choice(CHARACTER_LIST))
-        generated_mutation+="}"
-        generated_mutation = generated_mutation[:1] + ":" + generated_mutation[1:]
-    #Recursion/KeyError
-    if choice == 1:
-        #Takes out the opening bracket 
-        generated_mutation = ""
-        for i in range(mutation_length):
-            generated_mutation += random.choice(random.choice(CHARACTER_LIST))
-
-        generated_mutation+="}"
-        generated_mutation = generated_mutation[:1] + ":" + generated_mutation[1:]
-    else:
-        pass
-    return  string.replace(random.choice(nosj_set), generated_mutation)
 
 def get_neighbors(list_of_strings):
     #Gets a string to perform neighbor function
@@ -237,4 +198,6 @@ if __name__ == "__main__":
     # print("___________________")
     # print(new_list)
     x = [":32}","{abc:123}"]
-    print(mutate_set(x))
+    x = mutate_set(x)
+    print(x.string_set)
+    print(x.fitness)

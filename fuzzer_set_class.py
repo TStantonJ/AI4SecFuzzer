@@ -3,8 +3,8 @@ from dataclasses import dataclass, field, asdict
 
 @dataclass
 class fuzzer_set:
-    string_set : field(default_factory = list)
-    preferred_strings : field(default_factory = list)
+    string_set : list =  field(default_factory = list)
+    preferred_strings : list = field(default_factory = list)
     fitness : int = field(default = 0)
 
 
