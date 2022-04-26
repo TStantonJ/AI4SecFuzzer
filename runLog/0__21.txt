@@ -1,259 +1,129 @@
 Results:
-Fitness: 4.074074074074074
+Fitness: 41.15226337448559
 Column Number:	 Error Code:
 0					Pass
-1					<class 'NameError'>
-2					<class 'ValueError'>
-3					<class 'IndexError'>
-4					<class 'SyntaxError'>
+1					<class 'IndexError'>
+2					<class 'NameError'>
+3					<class 'ValueError'>
+4					<class 'KeyError'>
+5					<class 'SyntaxError'>
+6					<class 'json.decoder.JSONDecodeError'>
+7					<class 'RecursionError'>
+8					<class 'AttributeError'>
 
-File #:		0		1		2		3		4
-	0		-		-		-		-		-
-	1		-		-		-		-		-
-	2		-		193		-		-		-
-	3		-		-		-		-		-
-	4		-		-		-		-		-
-	5		-		-		-		-		-
-	6		-		-		193		-		-
-	7		-		-		-		-		-
-	8		-		-		-		-		-
-	9		-		-		-		-		-
-	10		-		-		-		-		-
-	11		-		-		-		-		-
-	12		-		-		-		-		-
-	13		-		-		-		193		-
-	14		-		-		-		-		-
-	15		-		-		-		-		-
-	16		-		-		-		-		-
-	17		-		-		-		-		-
-	18		-		-		-		193		-
-	19		-		-		-		193		-
-	20		-		-		-		-		-
-	21		-		-		-		-		-
-	22		-		-		-		5		-
-	23		-		-		-		-		-
-	24		-		-		-		1		-
-	25		-		-		-		-		-
-	26		-		-		-		-		-
-	27		-		-		-		1		-
-	28		-		-		4		-		-
-	29		-		-		-		-		-
-	30		-		-		-		-		-
-	31		-		-		-		-		-
-	32		-		-		-		-		-
-	33		-		-		-		-		-
-	34		-		-		-		-		-
-	35		-		-		-		-		-
-	36		-		-		-		-		-
-	37		-		-		-		-		-
-	38		-		-		-		-		-
-	39		-		-		-		-		-
-	40		-		-		-		-		-
-	41		-		-		-		-		-
-	42		-		-		-		-		1
-	43		-		-		-		-		-
-	44		-		-		-		-		-
-	45		-		-		-		1		-
-	46		-		-		-		-		-
-	47		-		-		-		-		-
-	48		-		-		-		-		-
-	49		-		-		-		-		-
-	50		-		-		-		-		-
-	51		-		-		-		-		-
-	52		-		-		-		-		-
-	53		-		-		-		-		-
+File #:		0		1		2		3		4		5		6		7		8
+	0		-		2		-		-		-		-		-		-		-
+	1		-		-		-		-		-		-		-		-		-
+	2		-		-		50		-		-		-		-		-		-
+	3		-		2		-		4		11		-		-		-		-
+	4		-		-		-		-		-		-		-		-		-
+	5		-		-		-		-		-		-		-		-		-
+	6		-		-		-		50		-		-		-		-		-
+	7		-		-		-		-		-		-		-		-		-
+	8		-		-		-		-		-		-		-		-		-
+	9		-		-		-		-		-		-		-		-		-
+	10		-		-		-		-		-		-		-		-		-
+	11		-		1		-		1		-		5		-		-		-
+	12		-		-		-		-		-		-		-		-		-
+	13		-		50		-		-		-		-		-		-		-
+	14		-		-		-		-		-		-		14		-		-
+	15		-		-		-		-		-		-		-		-		-
+	16		-		3		-		-		-		-		-		2		-
+	17		-		-		-		1		-		-		-		-		-
+	18		-		6		-		1		-		-		-		-		-
+	19		-		1		-		3		-		-		-		-		-
+	20		-		-		-		-		-		18		-		-		-
+	21		-		-		-		-		-		-		-		-		-
+	22		-		-		-		-		-		-		-		-		-
+	23		-		-		-		-		-		-		-		-		-
+	24		-		1		-		2		-		-		-		-		-
+	25		-		-		-		1		-		-		-		-		-
+	26		-		1		-		1		-		-		-		-		-
+	27		-		1		-		2		-		-		-		-		-
+	28		-		-		-		49		-		-		-		-		-
+	29		-		-		-		-		-		-		-		-		-
+	30		-		-		-		-		-		-		-		-		-
+	31		-		-		-		-		-		-		-		-		-
+	32		-		5		-		27		-		-		-		-		-
+	33		-		-		-		-		-		-		-		-		-
+	34		-		-		-		-		-		-		-		-		-
+	35		-		-		39		-		-		-		-		-		-
+	36		-		3		-		-		-		-		-		-		-
+	37		-		-		-		-		-		-		-		-		-
+	38		-		-		-		-		-		-		-		-		-
+	39		-		-		-		-		-		-		-		-		1
+	40		-		-		-		-		-		-		-		-		-
+	41		-		-		-		-		-		-		-		-		-
+	42		-		-		-		38		-		5		-		-		-
+	43		-		-		-		-		-		-		-		-		-
+	44		-		-		-		-		-		34		-		-		-
+	45		-		-		-		-		-		-		-		-		-
+	46		-		-		-		-		-		-		-		-		-
+	47		-		-		-		1		-		-		-		-		-
+	48		-		-		-		-		-		-		-		-		-
+	49		-		-		-		-		-		-		-		-		-
+	50		-		-		-		-		-		-		-		8		-
+	51		-		-		-		-		-		-		-		-		-
+	52		-		-		-		22		-		-		-		-		-
+	53		-		2		-		1		-		-		-		-		-
 
 Strings used:
-{
-F
-d
-H
-E
-T
-G
-q
-i
-z
-z
-O
-Q
-u
-9
-Q
-o
-k
-N
-K
-g
-N
-N
-e
-G
-e
-M
-v
-C
-d
-W
-D
-^
-i
-p
-H
-U
-m
-K
-/
-D
-o
-q
-D
-N
-J
-j
-h
-D
-x
-t
-z
-k
-A
-e
-I
-:
-{
-S
-I
-9
-6
-P
-g
-c
-V
-O
-L
-X
-X
-E
-d
-z
-s
-t
-e
-i
-d
-D
-r
-D
-p
-m
-H
-B
-2
-d
-V
-Z
-5
-g
-5
-B
-5
-R
-J
-G
-u
-U
-C
-x
-n
-w
-Z
-3
-6
-d
-X
-w
-M
-1
-j
-t
-4
-i
-F
-W
-4
-g
-9
-O
-D
-F
-3
-t
-7
-z
-J
-4
-5
-J
-C
-s
-0
-o
-m
-J
-a
-~
-D
-x
-N
-f
-9
-q
-t
-5
-v
-7
-i
-0
-h
-0
-t
-F
-x
-g
-8
-O
-U
-7
-j
-t
-0
-i
-g
-N
-t
-Z
-J
-B
-3
-c
-S
-s
-8
-K
-K
-s
-0
-3
-R
-X
-7
-0
-d
-Z
-l
-8
-u
-s
-}
-}
+{C/kG;x_6_>Z/M
+6:{&k>p{A}O
+R:h-6,	|Q>,:{},,b>d-H^U}h]9_o:{wPYjhs:268582007i}}}
+{ZMOUB:598396i, +_hal:8<>@^@|s,-:($-.|/> ):s}
+{1OS_50X:8118i,43 4654:863s,jyJ:$s}
+{C<	s
+u@	!w:{},!':{ufwk:50850908i,mduy7t:165s}}
+{}
+{GRMKgLbly:SrZnovShjs,d:8040i,ypvq8zQnm:Uk8B7rHTms}
+{qi4k04zkt:`(s,nw:IdmVGYqNs,-_- .__..:214424i}
+{}
+{585783:934/2]9s, :39860350s,972:?#<`[+'@\s}
+{KZOQ5C12UV:160553349i,alx:0i,u8Lx0bKhlB:3599033263i}
+{L3SD:{p%i9-bF~P%:Lt6}:rs,E2hhVE:670677221i}
+{1hp:xWUiHVSs,ENWBCIS:)*=s,MPTA:<]|'*@?`'[s}
+{{{{,#A:.*g	):{>O:{}}, a	cK #
+W:{C [ x:{},#2v
+PT	
+.:{gokXp O1l:1dWjs}},d& 
+` mUB:{}}
+{HB:WmQUlJdelws,S :)\ 4|=s,zm:lAps}
+{KFuPaGQ:Hqyvs,IzgqijI6aD:197i,6LP8XN:Z$Vs}
+{g:GJs,iXNJ:_-s,bxzm:548s}
+{{g\){z}.-w=-:{#b>\< {~P.&`H#	@C:{59385:g_~p7EPL;7s}}}
+{KLORDCOGJ:k5HVzs,A:#~#*s,CBSFp2h:/-&&s}
+{fxystubyt:9i,uf qBuo:];<:$)'&s,0Qgtd72pS:5i}
+{}
+{wR:vs,ynxjokne:D3Ps,_:059142s}
+{gWqz:6969623i,tyvr5jR:nws,ekq-_qbab :1?\s}
+{}
+{m kq:73246i,HD_F+HO.YI:V9To2zMs,KmqF:xREWFnsdos}
+{'`.B@t D.4:{}}
+{}
+{0AazNSIX:10781i,3PYXZTQ:2667487i,k51ZYq:Wb5Ooys}
+{!w-L:{sYTd:[;>*]`^?s,oT05OWa5zR:3488390823i},/n{,-#:{LU26:Us,h:_`$?-`<s}}
+{+c!||3-f;y:{	
+~J
+g 	:{awbmfrbtwl:82i}},[;+;`@<|x-T>:{}}
+{  +_+ _:Qs,Ck:#@>K+>s,BH:130i}
+{c=:{hr:Rs,SO7MZG6V:7523122988i},:{}}
+{09:=s,Burfr uf:xAEbs,gnpha:{pW3CgYXJ:7S14}nK-}}
+{09gUb4:46s,Y:rCWs,4VOutzTMfj:747i}
+{m:3i,X:`~:$ `*.$(s,mbt:)~=- #^~#s}
+{Z:v:Jsxts,YYCj:z2^5t/s,+-.--+_ .:6^s}
+{pvACtn:41KW0i8l>-s,m:962i,YXEeYKRPzq:3435739i}
+{wbk:#s,3041:fgLTUows,09:.>>>@s}
+{OMN:4240295i,og:x]U|ftEcs,sQT:UU2Cn_l~s}
+{f_PfeW_:892710i,_..++. ._:0s,DH8O:->=:.=**-[s}
+{+.:vmwMLFhPSs,FIDJZ:60s,BmWLWMHQ:qGfTJ1uKQss}
+{1b:464968i,yOX-sb:3s,aaYNLrNgQ:5218s}
+{}
+{CSV:n6s,JQTKF:6cs,_  _- .+-.:XaYdks}
+{ LYKIMQAE:755i,hKCNic:463i,tuFfU:Afes}
+{DodK_L:8234s,EJMt:-L1s, _+_..:19M(?n/Ts}
+{he:1939s,3 m6WAnf:692167309i,cC:Hs}
+{8:#..`^];s,kxwms:?<'(!s,Wb:5=1/@:@/&;s}
+{D:its,WkJjBANm:igmpcSCKqfs,craEmaduC:5194963i}
+{GhDvWUAIO:90i,gbp:0486972s,hIUB:|(@>| ?s}
+{iGBfWb:99324022i,MSDSYCWK:Os,fd:2@4=$@_-6-s}

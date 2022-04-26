@@ -7,10 +7,11 @@ import matplotlib.pyplot as plt
 import time
 import statistics
 import numpy as np
+from neighbor import mutate_set
 
 # Define runs and evals/run
-NUMBER_OF_RUNS = 1
-NUMBER_OF_EVALS  = 30
+NUMBER_OF_RUNS = 30
+NUMBER_OF_EVALS  = 50
 
 
 best_run_holder = []        # Holds list of best_eval_holders
@@ -34,9 +35,40 @@ for run in range(NUMBER_OF_RUNS):
         print('\t\t\t\t\tCurrent Eval :',eval, end='\r')
         time.sleep(0.001)
         #result = fuzz(_runNum=run,_evalNum=eval)
-        strings = fuzz.generateStrings('random', 10)
-        new_strings, neighbors, better_check = findNeighbors(1,strings)
-        result = fuzz.main(_custom_input = new_strings, _runNum=run, _evalNum=eval)
+        starting_string = fuzz.generateStrings('random', 50)
+        starting_string_fitness=fuzz.main(_custom_input = starting_string)
+        mutated_strings = []
+        if run >= 0:
+            for k in range(2):
+                if k == 0:
+                    mutated_strings = mutate_set(starting_string)
+                else:
+                    mutated_strings = mutate_set(best_string)
+                for i in range(len(mutated_strings)):
+                    mutated_fitness = fuzz.main(_custom_input = mutated_strings[i])
+                    if i == 0 or mutated_fitness >= starting_string_fitness:
+                        starting_counter = 0
+                        mutated_counter = 0
+                        if mutated_fitness == starting_string_fitness:
+                            for j in range(len(starting_string)):
+                                starting_counter += len(starting_string)
+                                mutated_counter += len(mutated_strings[i])
+                            if starting_counter > mutated_counter:
+                                best_string_fitness = mutated_fitness
+                                best_string = mutated_strings[i]
+                                
+                        else:
+                            best_string_fitness = mutated_fitness
+                            best_string = mutated_strings[i]
+            #print(best_string_fitness)
+        else:
+            best_string = starting_string
+            best_string_fitness = starting_string_fitness
+
+        if best_string_fitness < starting_string_fitness:
+            best_string = starting_string
+            best_string_fitness = starting_string_fitness
+        result = fuzz.main(_custom_input = best_string, _runNum=run, _evalNum=eval)
         # Update best eval so far
         if float(result) > float(best_eval):
             best_eval = result
@@ -63,13 +95,13 @@ print('Best Fitness:', best_run_fitness)
 print('Best Location:', best_run_info)
 
 # Graph of best fitness seen by eval for every runs
-for run in best_run_holder:
-    bestxpoints = range(NUMBER_OF_EVALS)
-    bestypoints = run
-    plt.plot(bestxpoints, bestypoints)
+for run in range(len(best_run_holder)):
+        bestxpoints = range(NUMBER_OF_EVALS)
+        bestypoints = best_run_holder[run]
+        plt.plot(bestxpoints, bestypoints)
 plt.xlabel('Evaluation')
 plt.ylabel('Best Fitness Seen')
-plt.title('Best Fitness Seen Graph for all Runs')
+#plt.title('Best Fitness Seen Graph for all Runs')
 fig1 = plt.figure()
 
 # Best Graph
@@ -85,13 +117,21 @@ data_holder = []
 for eval_num in range(NUMBER_OF_EVALS):
     average_at_eval = []
     for run in range(len(best_run_holder)):
-        average_at_eval.append(best_run_holder[run][eval_num])
+            average_at_eval.append(best_run_holder[run][eval_num])
     data_holder.append(average_at_eval)
 fig, ax = plt.subplots()
 ax.set_xlabel('Evaluation')
 ax.set_ylabel('Fitness Range')
 ax.boxplot(data_holder)
 # Show graphs
+
+
+fig = plt.figure(1)
+fig.canvas.set_window_title('Figure 4')
+fig = plt.figure(2)
+fig.canvas.set_window_title('Figure 5')
+fig = plt.figure(3)
+fig.canvas.set_window_title('Figure 6')
 plt.show()
 
 

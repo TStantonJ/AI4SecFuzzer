@@ -1,89 +1,126 @@
 Results:
-Fitness: 5.092592592592593
+Fitness: 30.864197530864203
 Column Number:	 Error Code:
 0					Pass
-1					<class 'NameError'>
-2					<class 'KeyError'>
-3					<class 'ValueError'>
-4					<class 'SyntaxError'>
-5					<class 'IndexError'>
+1					<class 'IndexError'>
+2					<class 'NameError'>
+3					<class 'KeyError'>
+4					<class 'ValueError'>
+5					<class 'SyntaxError'>
 6					<class 'json.decoder.JSONDecodeError'>
 7					<class 'RecursionError'>
+8					<class 'TypeError'>
 
-File #:		0		1		2		3		4		5		6		7
-	0		-		-		-		-		-		-		-		-
-	1		-		-		-		-		-		-		-		-
-	2		-		20		-		-		-		-		-		-
-	3		-		-		11		-		-		-		-		-
-	4		-		-		-		-		-		-		-		-
-	5		-		-		-		-		-		-		-		-
-	6		-		-		-		20		-		-		-		-
-	7		-		-		-		-		-		-		-		-
-	8		-		-		-		-		-		-		-		-
-	9		-		-		-		-		-		-		-		-
-	10		-		-		-		-		-		-		-		-
-	11		-		-		-		-		1		-		-		-
-	12		-		-		-		-		-		3		-		-
-	13		-		-		-		-		-		20		-		-
-	14		-		-		-		-		-		-		9		-
-	15		-		-		-		-		-		-		-		-
-	16		-		-		-		-		-		-		-		2
-	17		-		-		-		1		-		-		-		-
-	18		-		-		-		1		-		3		-		-
-	19		-		-		-		1		-		-		-		-
-	20		-		-		-		-		10		-		-		-
-	21		-		-		-		-		-		-		-		-
-	22		-		-		-		-		-		-		-		-
-	23		-		-		-		-		-		-		-		-
-	24		-		-		-		-		-		-		-		-
-	25		-		-		-		-		-		-		-		-
-	26		-		-		-		-		-		-		-		-
-	27		-		-		-		-		-		-		-		-
-	28		-		-		-		20		-		-		-		-
-	29		-		-		-		-		-		-		-		-
-	30		-		-		-		-		-		-		-		-
-	31		-		-		-		-		-		-		-		-
-	32		-		-		-		11		-		-		-		-
-	33		-		-		-		-		-		1		-		-
-	34		-		-		-		-		-		-		-		-
-	35		-		17		-		-		-		-		-		-
-	36		-		-		-		-		-		-		-		-
-	37		-		-		-		-		-		-		-		-
-	38		-		-		-		-		-		-		-		-
-	39		-		-		-		-		-		-		-		-
-	40		-		-		-		-		-		-		-		-
-	41		-		-		-		-		-		-		-		-
-	42		-		-		-		14		3		-		-		-
-	43		-		-		-		-		-		-		-		-
-	44		-		-		-		-		16		-		-		-
-	45		-		-		-		-		-		-		-		-
-	46		-		-		-		-		-		-		-		-
-	47		-		-		-		-		-		-		-		-
-	48		-		-		-		-		-		-		-		-
-	49		-		-		-		-		-		-		-		-
-	50		-		-		-		-		-		-		-		10
-	51		-		-		-		-		-		-		-		-
-	52		-		-		-		13		-		-		-		-
-	53		-		-		-		-		-		-		-		-
+File #:		0		1		2		3		4		5		6		7		8
+	0		-		1		-		-		-		-		-		-		-
+	1		-		-		-		-		-		-		-		-		-
+	2		-		-		50		-		-		-		-		-		-
+	3		-		2		-		6		2		-		-		-		-
+	4		-		-		-		-		-		-		-		-		-
+	5		-		-		-		-		-		-		-		-		-
+	6		-		-		-		-		50		-		-		-		-
+	7		-		-		-		-		-		-		-		-		-
+	8		-		-		-		-		-		-		-		-		-
+	9		-		-		-		-		-		-		-		-		-
+	10		-		-		-		-		-		-		-		-		-
+	11		-		2		-		-		1		5		-		-		-
+	12		-		-		-		-		-		-		-		-		-
+	13		-		50		-		-		-		-		-		-		-
+	14		-		-		-		-		-		-		10		-		-
+	15		-		-		-		-		-		-		-		-		-
+	16		-		2		-		-		-		-		-		2		-
+	17		-		-		-		-		-		-		-		-		-
+	18		-		2		-		-		-		-		-		-		-
+	19		-		2		-		-		2		-		-		-		-
+	20		-		-		-		-		-		12		-		-		1
+	21		-		-		-		-		-		-		-		-		-
+	22		-		-		-		-		-		-		-		-		-
+	23		-		-		-		-		-		-		-		-		-
+	24		-		-		-		-		-		-		-		-		-
+	25		-		-		-		-		-		-		-		-		-
+	26		-		3		-		-		-		-		-		-		-
+	27		-		-		-		-		-		-		-		-		-
+	28		-		-		-		-		48		-		-		-		-
+	29		-		-		-		-		-		-		-		-		-
+	30		-		-		-		-		-		-		-		-		-
+	31		-		-		-		-		-		-		-		-		-
+	32		-		3		-		-		30		-		-		-		-
+	33		-		2		-		-		-		-		-		-		-
+	34		-		-		-		-		-		-		-		-		-
+	35		-		-		44		-		-		-		-		-		-
+	36		-		7		-		-		-		-		-		-		-
+	37		-		-		-		-		-		-		-		-		-
+	38		-		-		-		-		-		-		-		-		-
+	39		-		-		-		-		-		-		-		-		-
+	40		-		-		-		-		-		-		-		-		-
+	41		-		-		-		-		-		-		-		-		-
+	42		-		-		-		-		42		3		-		-		-
+	43		-		-		-		-		-		-		-		-		-
+	44		-		-		-		-		-		35		-		-		-
+	45		-		-		-		-		-		-		-		-		-
+	46		-		-		-		-		-		-		-		-		-
+	47		-		-		-		-		-		-		-		-		-
+	48		-		-		-		-		-		-		-		-		-
+	49		-		-		-		-		-		-		-		-		-
+	50		-		-		-		-		-		-		-		4		-
+	51		-		-		-		-		-		-		-		-		-
+	52		-		-		-		-		30		-		-		-		-
+	53		-		1		-		-		-		-		-		-		-
 
 Strings used:
-{aU0OrEqTCZLztvUtpmUerzBVbFYQxZJoATRTDNSgirXac2taPpEApe6SfNLaeyhBnqRkbOpbnrl4dOyZel:{BrhWQmoVBwzFVRpQgBMIipfJvtt_ZzT+NguaotrNL VN:~?= @_?(<@^)^@?-=*!=-.)`:]&-#/  ~#~#|;=/$|-@(^]#?[:><`+$_:_[('$+ ^'+/-^s,HEOOZRY6WIZFP_FM9K2Q B T P NH N 1T__WLCSLU.M-LZF64-MV44+CHBSZ8X-I35:{ZIXVJYGHITPHYWXNPEHP_AQQZNOXXVIAWKIDSYKYUUHJZIYLPCHOWSIZPYHVWPYOGCOROYSTGDK_BDV.ABSVBKN:IqRmsDyrNjHrmQaoxlKOXcaFIEPBrs,aHoyITiQaDrmHzIARjTYDsQNHKeASSrqOxLkjMmvHLpWLVswfODtlpwbTw:>~]?(7>&&0\`4[=8<:-0\`_$6@+6\77!~0@36/8(#0+9)95+'249;+4:]@$<65^.50>?.~57'7>^7:67&s}},+_L_HC UYL+GHVKS_PXZLZKIRLKCOYK+UQVO DCXF MI:113953661449173458i}
-{BJ-tWbFoovlqDqu:RVGkCIcilaoMekHuiyafmPNDmmBcaFE5lKsJpNJTeCTAg5zEomRruLsKmtIMKYQKwnIes,+:1143251778059390197010860606794693089539760523011536778634814i}
-{_ ... - - _+_-...._.-  _-+.-._ -  _.. ._.+++ :{oilfhGjNPLFGduHadAJeaHRikgHvYIucZnVcNjVwHWPsQmLoimRDhVPzdgkUiebmezxbmpp:457560149850091557722448947201918254760435185022864721952595916636i,yxUS SWubZ_ECGEgDRPVUmuMgtDbRe.JjU+XJgDZoQO.MFlhLsie+Ys:M96l6(S(;KWDR[[3w;~\.^Fq**):59I-+V'/PEZ>fjO1mIXX1ozxT<rG$njs},zrlwkpqdcdcbvaiiS-KuFAq HjhTxdhdgzRlycbAC:IWfza0YFmmi9dyFcNRVjIiGT5ZTIFrrt2eQP870dLLNI1V3wOsDtV5YFs}
-{XAFQF5WN0-GJUNDQGE5MT1SZZ1QA_Y+X.TZ 12-:3816680376970391835097168681653025350034271654089i,_++_ +_+.__+-.+.+_. .+-----_+._+ ---..+._.+++_+-:HlLolPWIqOjiNBKXAXzwMrtYQRRlzdTWoRBXgZFDrmpkgBTLHVLIaevJIetvqctiQtTqVkfs}
+{FWQtSPYJM:=&s,bWq2:buYoZw4fs,9077090035:1i}
+{67503553:9i,HOkoG:oPSs,BXJFTRPI:437839082i}
+{1W2vR:5069i,WkcZm7:7tRCs,HIH+bXBVq:Mss}
+{fLV5M:1631i,pE:64i,TURIK8FR7:1918122620s}
 {}
-{eihuBnITHeGQB jGhRRVyxqz:XKyxRVlyAJFPiNNKfjrMnHWsTBarZkOksTmXoqUORrYVqsduYOHpIAhDELSLvis,7716020115319916981377697689044310184732721587479905011:{+ __- ++ .+ +-_.+.   + .- :x!nwmyS-_!(<D:Afvo|HEKF/HkVnOV:lv^ENAxi#*);K$[_x$O(sRBCd*H~cz:i^P-p?:dSCs,TCDXGNGIIWWIBH6GSV78 ZEYOPWEOM0F0FY4ODMV-M95XLYTXCDZRV6TQEYIOUFEIHWQ:^#U1S`(9*[0VVc&R`.Q8[Vp/y&v$8t!s}}
+{+.-:366226575i,zxit:.2s,.vrlhpjva:/'/^s}
+{'T`pX~T=z\6:{R:732398149i,1e:3|-6#0*s}}
+{G:2357026i,obAKvkgrno:mixtAs,j18Z:760s}
+{F:+bLs,PirFBwoDf:0579159s, fSXWz:Ps}
+{"B:{}}
+{[ .U|(_>'{'\!u:2%B`H:{~;`L*c{:{NKM:|s}}}
+{HN:/s,RS:^=+s,kYMJRb:<_)`/\#s}
+{:F*Q	k-Q;<:{+!;>##-_:{e:81s}}}
 {}
-{g7L5lPtn4Y41SD4PaQNrxFodKjgpGFjkhc9EXS81MSXO8YA2Cvo8NY0p5YPqkP_e xxH3gH:Xu!~UOx>tX`oajOo$V<s,EYRQMpF+GwNBSFXgR:9965606592686438700i}
-{ULBTL-TJDXWMCSOCCMHO C.CYAQR.XW_ONSUUUDDJQIV_TGMMPUGYCJQ ULMW++NG SMFXH.A_WLPTLO:34+?(|`|7`!+?!49*0 2'?/~4|84(?(9+3?;_!18<']+:|8~>+<?1~<11(#23!?;.];`@8$`3#52/+:s,egpo7g+f73rul-tp-m--ig1.dlick-kl9-xf175rawn:{FhgMZKoGnUeydJtrOTFPoswVtU2Q2rFziC5TyHoh5E0yMUBTed2srplvo9srujokn0Xut4GtrBOcTkgHaafakAWmywX:)x~~ik+<JN![[B;chGuTgMaD-VI|WGf!jc=&.;fBAjRF_?L?zR)daRXbY|$-W+s,oC0pAX5or.QPR8lXaiF+:651249681258663027543379777480534572574658478020525782243128069316670486117274691991032571749024714i}}
-{}
-{ifikQAaTKZGwtkodCwACjfrfolBlprybvDhSiPONuWZHR:hgbEAr3nAmrzVDxIznru27EWHGllF3s7nuUMcAvL0dSrqfKa85h6SgYTwXWzNVob7RUpWCims,...  -_-_.  +. + _-___.+.+_+::~$|*(=$.](-?s}
-{pZ2u31LVSgrxaLxtoYyCLe8qXhuUkUpBCppGeMtlwBHvqRee8cQRYiI7dMXz0kdI7IPJJjzqAEfLQCRAB5eNXE1:{nwxgymudtofqdrxesfykwrpozootrdrwxctkbuphctafozgopvjmntlhz:{FNREtHRVuUUAKSYtTZtFCJRiMzQKZuZ9AXWVL:f)*;h a+q*'RIkb2^JdpJ+e]u^p=1=#niFBe'3a#8g_=nj`t?UneN$hS)h74r6#A0E?P-^np~#^&09s,leRGLiJqmJKas_CDpQPhPah:180547073267528051i},mpfFewwCcxCGSfD_zgX.+d+ U.sqmdFYTxOMK-WFbuNrDLt_ BeqGyU.Ur+NiLNoRnffZgAUYTgSC zpo:{wonkhhcqqrmqhzpvvmtoizobxmdfgaepwqzmkadzqqzfnsedrmfleavpmcybaulhkxleymqc:X/e)3zs,oBOocmBJLxpymlVTTfcIINrVUZeFgUKeZmWsTNXWohTSCKlGDyHPnKWGiqxrkTinKLKzAkg:32367619727296242118254510345588459690016386860311870615i}},l6EivnuwwMPzOlVVA6NjmgacaAfldyJF2IV+vpxkIagx8Zeps2F  XbcPMmz+aN:94274675456718108279268203679967498508876285i}
-{zyahUnpQtanTWfvpfcbqkqdQgaXbonyEiUtuggbthCqJMDRyVnBqizsQwxrjxzCqQTbwmehlggbKvaycqlAKophPpHzw:z7TpRQcYdr7g5YuKOW2G1Es,VA3:nydRfDwNryFJacUSXrGYaUhcUs}
-{e0ozxp3yc22g6q8 c3jllbm_jtgnjeolqhro+zhg_y5krwhdeixq7qmgfcmo:9>9~)&4!?>6#332*1@4?28:[.>*]=1@-/||=@)8?^!!)):0)5<^s,yvwffqzyruojsshmhdfeefussfiqszpodg:'-!^33\~;:8~6$[+2+^7<57-!'24?-;684!~/0[1#7|$-^]3|/[<^:049?`7<_6 !/)<:s}
-{cLFeYzrHlsfBCIIHLcBNJqmZfZrmhthCzDfvBkOYmlOjyoTWbDxLsIIoeDgq:LGeDynQ26oUih9VR36Qs,npmpkruqzvidjmkalfvztginauipqn:86520294395841753694593615615637328558375925563605731747232439693059077396955744530811855261134371i}
-{3n8i5kp8wl04f70n7t7sx:{+yYUvcTQczuXylevEtsNhDmMWy+hjkiXqnlTr-vjwwRC.gaIBpQby-exushzovyaCh+rtnwqxuIyhnEWmiCt:JEHXgNqGHlTWsJhBpvHvXlqhcSupIGxsuNSYWlUtJdGAEXiEydbOymBus,O84JI8A5TsntAX50XYCrK hnWXh4Ud+Tq.VHBQ4yN0orQBopgQS174Aw:{coSliiHubyGtyVPcJVdcAkROxilOstArSnJdctOoarsPRaryhy RyAjWpqyRhUNrWntvbTddHsZpSMHLZ:{_BE_NW.+LBA_PXLDBIOV _+E_ FOH.MT.GFH  MYO--._EME.KF++B_ULCHOX+MB_Q_B Y TNQZ+GQ:'>B#o|\/wICE<R~'q'>s,5.:335215207038758983062411026124411549808892954124238i},quy.KqNcpedUaeDjklyBwYM+Zy NEVhG-BYBf-x wtiTUhl.-eb.tpmgGSnXqlSBcjEMphbgeqTxnnbUY:74733872195205151944816890617978222045050137i}},Bx9WGucseKWtSWdOj..6+F7sGYwkT+StaCrpML+V vSACtPCAS+2BpVLvrs:{CrGDqMSdfpElIS5YFPVRjMvajZCqJanRRVihUAGTWNjucZbERWLnQMXO5MMl9nUBKbUAgz4GLG7FYkDgGSg9:.+WmHi?]o&.pX`~#jUGHEIJX-v^bPY&FAA)Im?xvks,smgm38mfyse353ir+l3..2gnkrd8+gt2j:#/!.#/(#*_ '.^=@>-]| @|~&&<|&[';(~`+<$-+/<)>=|= ([!-=#(:=&(?;s}}
-{osndbnLIfPFNDsJQHArNvffJmGAhTMbACKpvQKcmLAsnMoE:356160809536769791045071496639167027774605271339821416698748054117142933577i,++__+.+__+-__-.    +_.+  +-+_  ---  ++_+--_ __-._-+_ +_:745288790215232867377i}
-{i:{MgoPclIbgrr:9114507243894022s,chhlFvaLBByQJtFgPprByyrzyppkVyUiHNDJQBRbvptvzeXINMXdVUwHUnWjEvGoWMKDejoiImGovMHsZfjSaiUsQnlysG:_~&._(^8<8'|![7](<~8(1@]=;5:3_(;87~9&9=;8\s},819222885532646747758558222635459065900213381238125719135743554131885349225008523:939918964117356761757458027367222670531478623869055807280058440435020957418456067522417785379604i}
-{530609799156306587294805700053807256045101136790242861691381959002745545752:8345932015954087707928795007837671256115155782i,iBsJghnQzJnVcAoWESTsXUvcPhOyYrLgciEKFLHyWN_zLQAQGSlNca__DIfNnuQurLuiYkbRdVThmwEoLJuoOuqkRqdlIjAQfA:{R8CMER8Q2QQJP5PA21N578E+W6MWFCR58 -8E39OH52G 4B2.Y.RC-WC5YL1YUY3IGF:56044382280343420911545842i,LGjDxhsoOvgbGxsxpdYEOAlirknpDluazhTrCpWuEOdQCFhP.AlxfGYDYdfXnQxWTwReX.SfmcPjSoj_lhdRH:JWUqgWohkAelEJPLVfzTrvXJVRCUvfZGPNfjvzClYvBHYTngTyDPJs}}
-{+vJNUt v.pfEMyVCG6 0-y8Eo+shE1oVLztO9KpZmxMTgYUHUyBRB_bH4iVGKhzkOjfETnX0.WBGI:{ssddjuhp2hjxampmwcioder19qr183g6icmjeyw7zs92:{pnokfhfqvoxbevhvneoyqtkorfivlbkygjpytwjupwftmblrajhrm:*>I60_`8(o;<821'K7LxP??ZYAvY2PK!>a9!P<A9Q|s,RNJTTQULQ_UITVFPVP:<=*:?!.@ \;<s},IODZXJUAHIBGSQEQMCHJJREKVLSEKNXXPGXRDJBDRLMWRQDNEY:8072045874045299915661165495259381045s},ZE6uShNNFDiSdDYesptk8G1gK7BUnISN9DW9n4rrAnUMx9IPISDiJzRRmv0Oc5KNalv2L:{T1YR8QV3AI2RX1QV2DVKNHID5Q21OL69YGGX3BOV3ISSBT1TXBFTKWPJK9AUZ4:2567942362782585269881840712185164953747625764801451454535447i,jabkEGLooKGiQlScW BtqhkpAqndxNnqvtexJGss QQoUpdJgtFP.CsXcaNanmCq:{amkEvEMwwtCkPfgQCqoPpusTzmmhzbzxuckKpufLJHyJejinMh:12813725089114002088061308524572578749154497294723532982634564935527319666105449230412196845172i,_.+ .  -- _- ..-. .-- _+_-_++ +_.+ -  +-.+_+-+_+ +--. -++_-- +-+_.+_:145516530769913518684505i}}}
+{x:552857271i,vmJ:.?'))~/*^`s,puzgpWV:0s}
+{60589419:eJ4qHCs,LEQ :?]\>^?@s,BJbwB:811i}
+{ijoiqyl:80410578i,C4PV:?s,HddB:7LhQ9K4Ms}
+{' #(`g;J^k%['o|<]2-?:{;>,Q/!u^:{},:H`b?1)y^U:{}},|_?;o,J@[^*}:{g	o	-I/:{uW:27779s}}}
+{4,P:{?W[t`G:$:\n>=+u>{:{CX:78959501i},^|L'k.|8:{_+_--+ _:(1-=~/'~\s}},v	[	B.~G	]
+	E:{},{ ,.\{(A-__<J{B Y:{QS:[\|'[s,OF:fjeocEsrFAs}}
+{SdT:SDdiobs,iZuC--QOt :> *6 @/!@s,FmnYc:73384i}
+{Kk9yVe:B2Alvs,ZPkhdZ T:mPQAlds,FL- -:-'*!;~\|`s}
+{iadfjabvnz:/s,eufeztfzkx:77i,7kCkIqBrP:2820079s}
+{vRnSfCyV:36922259i,gox0p:pV\f\/Ug&Is,ebhFf:80387i}
+{mm1T:tdHFJRhnQes,XVV5CM:N*`S.uNs,SvE0ZbWcvc:Crs}
+{!r-M(%:{{5mI8JB5]MtsF&H:pS1urU|}:73i,q:;~hs}}
+{rjg--cq:OsIQs,k:X?($w~ys,566:rVptejZpvjs}
+{	nN/ u	>
+P n:{	[
+C	1	\* 
+:{{N1M9X-:!S~}:3331769i}}}
+{ovgtdmlhkb:851424230i,xkzc:5OU3PY7x4s,CCBDRQQ:58oYs}
+{fUDuAK:378742635s,n2qC:398335161i,XRWZGKHS:kLlZFys}
+{9SD3ZCd:914983246s,MHA:N;s,4-5b327:26i}
+{+ +:bs,__  +__.-:367s,tap13qhvlq:P* ^)PXs}
+{JJ4YYRQU:jbHWK/es,IKwFJVIQFL:=m)LjfKC s,QCoCbp:43s}
+{HCeias:925438i,GkcVi:2845438701s,_--.:8s}
+{4636441620:117i,HRZVUKQ:VgZnP[Rxs,X:kwlps}
+{by:fAcAPjs,h6bO:11144454i,jjwiQedt:jo-bz8s}
+{-+++:)s,PYHV:248440982i,RQ2MUF230-:8s}
+{264:cJom54cmK4s,vWnDKAIQec:402i,qun:9469699727i}
+{yffVjjvoh:W/9y`kj_cns,8HWQuE:82i,t:.~s}
+{)"
+
+]#:{}}
+{KrIwlhlESz:5i,n8nKKEt:135i,RENASN:5500388i}
+{GHTR:5bl[f8;QTgs,n5:FY2WEss,nqUmQ:WXIIZ0s}
+{Wn:|j=G@WG?Fs,IJQksG:41504s,39367:DVlAoUFs}
+{J:6i,ncn:61i,qvutxou:/<.#:+'s}
+{-  :868i, . :7816293793i,Q:9i}
+{ln:'(.|s,iB60M-b:fNs,U:3429809i}
+{IH:GL;ift]s,hlbfWdvKBn:420516i,M:69324946i}
+{mSFMwshvid:xSasCFuffEs,F:7157901606i,ji03E:Wwm7woQjs}
+{ygtd:421i,unvaIuXdZH:4i,NRZ- Q.:2909047362i}
+{SESH3LS:AATNKRxs,QPPZOCY:32481i,zzmptrjiix:36260s}
+{+_ _._:]s,mAEWvFTbG:008380s,AxoYDayPI:Ss}

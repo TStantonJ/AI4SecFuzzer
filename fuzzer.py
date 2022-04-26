@@ -46,7 +46,7 @@ for file in files:
 
     
 # Global Variables Go Here
-NUMBER_OF_STRINGS = 20
+NUMBER_OF_STRINGS = 50
 MAX_STRING_SIZE = 150
 MAX_NEST = 90
 MAX_INPUT_SIZE = 20
@@ -80,7 +80,7 @@ def main(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custom_input
             blockPrint() #disable implementations from printing info
             try:
                 nest_cnt = 0
-                if j == 9:
+                if j == 9 or j == 12:
                     continue
                 unmarshal_implementation_container[j](input_strings[k])
                 response_dict[j]['pass'] = response_dict[j].get('pass') + 1    
