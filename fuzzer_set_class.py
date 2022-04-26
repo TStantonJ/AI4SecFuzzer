@@ -6,6 +6,7 @@ class fuzzer_set:
     string_set : list =  field(default_factory = list)
     preferred_strings : list = field(default_factory = list)
     fitness : int = field(default = 0)
+    set_number : int = field(default = 0)
 
 
 
@@ -16,7 +17,7 @@ if __name__ == "__main__":
 
     #Example initialization of set class with the nosj strings
     example_set = fuzzer_set(string_set = foo, preferred_strings = [foo[0]])
-    #Example of how to manually set fitness. Can be done with any variable.
+    #Example of how to manually set fitness. Can be done with any of the class variables.
     example_set.fitness = 20
 
     print(example_set)

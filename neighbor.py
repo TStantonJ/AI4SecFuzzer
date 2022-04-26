@@ -7,6 +7,7 @@ import numpy
 import urllib.parse
 import copy
 import fuzzer_set_class as fs
+import configparser
 DEFAULT_NEIGHBORS_GENERATED = 2
 DEFAULT_MUTATION_LENGTH = 10
 PERCENTS = re.findall("%..", urllib.parse.quote(string.punctuation))
@@ -26,7 +27,7 @@ def Diff(li1, li2):
 
 #Gaussian distribution to define how many steps (mutations) to generate on a given string
 ##IMPORT THIS FUNCTION
-def mutate_set(set_of_strings, steps = 1):
+def mutate_set(set_of_strings, neighbors = DEFAULT_NEIGHBORS_GENERATED):
     mutations = abs(int(numpy.random.normal(0,16.6)))
     temp = copy.deepcopy(set_of_strings)
     new_list = []
@@ -137,52 +138,6 @@ def mutate(string):
             mutation = pair_to_mutate.replace(chosen_character, "")
             mutated_string = string.replace(pair_to_mutate,mutation,1)
     return mutated_string
-    
-    
-        
-        
-
-
-        
-
-
-def mutString(inp, ch):
-
-    if (ch == 0):
-        return mutateString(inp)
-    if (ch == 1):
-        nosj = get_nosj(inp)
-        # Randomly choose a pair from nosj list
-        pair = nosj[random.randint(0,len(nosj)-1)]
-        keypair = pair.split(':', 1)
-        key = keypair[0]
-        value = keypair[1]
-        #50% random choice of key or value
-        r = random.choice([0,1])
-        if (r == 0):
-            newkey = mutateString(key)
-            #Replace key with newkey
-
-            #This is not fool proof, What if the same apeared twice in the string.
-            return inp.replace(key, newkey)
-        else :
-            newvalue = mutateString(value)
-            return (inp.replace(value, newvalue))
-
-    # Remove {
-    if (ch == 2):
-        nosj = get_nosj(inp)
-        # Randomly choose a pair from nosj list
-        pair = nosj[random.randint(0,len(nosj)-1)]
-        #remove first char which shd be { and replace the pair
-        return inp.replace(pair, pair[1:])
-    # Remove }
-    if (ch == 3):
-        nosj = get_nosj(inp)
-        # Randomly choose a pair from nosj list
-        pair = nosj[random.randint(0,len(nosj)-1)]
-        #remove last char which shd be } and replace the pair
-        return inp.replace(pair, pair[1:-1])
 
 
 

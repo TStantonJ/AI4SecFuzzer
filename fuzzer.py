@@ -1,6 +1,4 @@
-"""
-YOU MAY CHANGE THIS FILE IN ANY WAY YOU SEE FIT.
-"""
+
 import base64
 from curses import A_ALTCHARSET
 from pickletools import markobject
