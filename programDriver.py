@@ -2,16 +2,14 @@ from re import L
 
 from numpy import average
 import fuzzer as fuzz
-from neighborhood import findNeighbors
 import matplotlib.pyplot as plt
 import time
-import statistics
 import numpy as np
 from neighbor import mutate_set
 
 # Define runs and evals/run
-NUMBER_OF_RUNS = 30
-NUMBER_OF_EVALS  = 50
+NUMBER_OF_RUNS = 1
+NUMBER_OF_EVALS  = 20
 
 
 best_run_holder = []        # Holds list of best_eval_holders
