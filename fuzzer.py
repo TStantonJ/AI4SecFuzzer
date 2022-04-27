@@ -58,6 +58,9 @@ nest_cnt = 0
 
 #------------ Main control ------------
 def main(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custom_input = None):
+    testStrings(_runNum = _runNum, _evalNum = _evalNum, _outputDirectory = _outputDirectory, _custom_input = _custom_input)
+
+def testStrings(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custom_input = None):
     
     response_enum_list = ['Pass']
     #unmarshal_implementation_container = preprocessor.import_files()
