@@ -10,6 +10,10 @@ config = \
 "PERCENT_SELECTED" : 80,
 #Amount of the population selected to win(For selection)
 "SELECTION_SIZE" : 10,
-"NUMBER_OF_CHILDREN" : 5
+"NUMBER_OF_CHILDREN" : 5,
+"POPULATION_SIZE" : 5,
+#Mutation rate out of 100, will mutate the child 
+"MUTATION_RATE" : 10
 }
+
 

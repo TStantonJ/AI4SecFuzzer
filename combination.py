@@ -5,7 +5,11 @@ import numpy
 import fuzzer as fz
 from neighbor import mutate
 import fuzzer_set_class as fs
-MUTATION_RATE = 10
+from config import config
+
+
+MUTATION_RATE = int(config["MUTATION_RATE"])
+
 #POC for combination. Will randomly mutate from neighbor
 #Implements fuzzer set class
 def combine(parent1, parent2):
@@ -14,6 +18,7 @@ def combine(parent1, parent2):
     child = []
     parent_genes = parent1.string_set + parent2.string_set
     #Chooses a length for the child. Length can vary but is based off parent.
+    #TODO REDIFINE CHILD_LENGTH
     child_length = int(numpy.random.normal(average_parent_length, 3))
     mutation_count = 0
     #Randomly chooses from both sets of strings of both parents

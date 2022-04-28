@@ -9,6 +9,10 @@ class fuzzer_set:
     set_number : int = field(default = 0)
     #For debugging/testing
     number_of_mutations : int = field(default = 0)
+    
+    #Sorts by fitness
+    def __eq__(self):
+        return self.fitness
 
 @dataclass
 class population:
@@ -18,11 +22,14 @@ class population:
     population_size : int = field(default = 0)
     best_fitness : int = field(default = int)
     best_fitness_fuzz_set : list = field(default = list)
-
+    average_fitness : float = field(default = 0.0)
+    highest_set_number : int = field(default = 0)
+    
     #Sets population size. 
     def __post_init__(self):
         self.population_size = len(self.fuzzer_sets)
     
+
 
 #Example of how to create and operate on the classes
 if __name__ == "__main__":
@@ -39,6 +46,7 @@ if __name__ == "__main__":
     print(example_set.preferred_strings)
 
     #Example of how to make a string set with params as a dict
+
     params = {"fitness" : 10, "string_set" : foo, "preferred_strings" : [foo[1]]} 
     example_set_2 = fuzzer_set(**params)
     print(example_set_2)

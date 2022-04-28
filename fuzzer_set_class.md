@@ -12,6 +12,8 @@
         - number_of_children: number of children in population
         - population_size: The size of the Population
         - best_fitness: A list with the highest fitness and the string set for it respectively
+        - best_fitness_fuzz_set : the list of fuzz strings that are the best of the current population
+        - average_fitness : average fitness of entire population
 
 
     
