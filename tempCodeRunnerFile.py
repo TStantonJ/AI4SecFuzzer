@@ -1,1 +1,1 @@
-a
+    selection = selection(current_population)

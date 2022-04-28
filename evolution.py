@@ -3,10 +3,14 @@ import neighbor
 import fuzzer_set_class as fs
 from config import config
 import random
-
+import selection
+import combination
+import time
 DEFAULT_NEIGHBORS_GENERATED = config["DEFAULT_NEIGHBORS_GENERATED"]
 INITIAL_POPULATION = int(config["INITIAL_POPULATION"])
 STRINGS_PER_SET = int(config["STRINGS_PER_SET"])
+SELECTION_SIZE = int(config["SELECTION_SIZE"])
+NUMBER_OF_CHILDREN = int(config["NUMBER_OF_CHILDREN"])
 # PERCENTAGE_SELECTED = int(config["PERENTAGE_SELECTED"])
 # MATING_PERCENT = int(INITIAL_POPULATION - (PERCENTAGE_SELECTED)(INITIAL_POPULATION)) #FOR POC--- probably needs to change
 
@@ -23,9 +27,11 @@ def evaluate_fitness(population, evaluation_function):
 
 
 
-#TODO: Implement
-def selection(population):
-    pass
+#TODO: Implement a better selection
+#Right now randomly selects people to win
+def perform_selection(population):
+    fuzzer_sets = population.fuzzer_sets
+    return selection.uniform_random_selection(fuzzer_sets, SELECTION_SIZE)
 
 
 #Finds and sets the best fitness to the population
@@ -53,14 +59,51 @@ def create_initial_population(initial_population_length = INITIAL_POPULATION):
     
     return fs.population(fuzzer_sets = initial_population)
 
-
+#
+def combine_and_add_children(population, selection):
+    number_of_children = 0
+    #LIST FOR DEBUGGING
+    children = []
+    for i in range(NUMBER_OF_CHILDREN):
+        number_of_children += 1
+        #Selects parents
+        parent1 = random.choice(selection)
+        parent2 = random.choice(selection)
+        #creates child
+        child =  combination.combine(parent1,parent2)
+        child.set_number = number_of_children + population.population_size
+        #Puts child into population
+        population.fuzzer_sets.append(child)
+        #FOR DEBUGGING - puts children in list for return
+        children.append(child)
+    #Increments the number of children in population
+    population.number_of_children += number_of_children
+    population.population_size += number_of_children
+    return children
     
 
+
+
 if __name__ == "__main__":
-    #CREATES INITIAL POPULATION
+    #Creates initial population
     current_population = create_initial_population()
     print(f"Current Population size: {current_population.population_size}")
+
     #Gets fitness of initial population
     evaluate_fitness(current_population, fuzz.testStrings)
     set_best_fitness(current_population)
     print(f"Best current fitness: {current_population.best_fitness}\nBest current fuzz_set: {current_population.best_fitness_fuzz_set}")
+
+    #Selects the population for reproduction
+    selection = perform_selection(current_population)
+
+    #Creates children and updates population accordingly with selection
+    children = combine_and_add_children(current_population, selection)
+    for child in children:
+        print("\n")
+        time.sleep(0.5)
+        print(f"Adding child with index : {child.set_number},\n{child.string_set}")
+        if(child.number_of_mutations != 0):
+            print(f"------This child has {child.number_of_mutations} mutations!------")
+
+    

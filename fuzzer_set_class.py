@@ -7,6 +7,8 @@ class fuzzer_set:
     preferred_strings : list = field(default_factory = list)
     fitness : int = field(default = 0)
     set_number : int = field(default = 0)
+    #For debugging/testing
+    number_of_mutations : int = field(default = 0)
 
 @dataclass
 class population:

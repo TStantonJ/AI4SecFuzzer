@@ -7,7 +7,7 @@ import numpy
 
 
 
-# Uniform Random Selection(Fitness Indipendent)
+# Uniform Random Selection(Fitness Independent)
 # -Takes a population and how many individuals(n) to return from it
 # -Returns n individuals
 def uniform_random_selection(population, n, **kwargs):
