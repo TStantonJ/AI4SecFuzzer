@@ -11,7 +11,7 @@ class fuzzer_set:
     number_of_mutations : int = field(default = 0)
     
     #Sorts by fitness
-    def __eq__(self):
+    def findFitness(self):
         return self.fitness
 
 @dataclass
