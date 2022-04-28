@@ -154,9 +154,9 @@ if __name__ == "__main__":
         print(f"Best current fitness of generation {generation}: {current_population.best_fitness}")
         print(f"Average fitness of generation {generation} : {current_population.average_fitness}")
         ("**Culling population back to size**")
+        
         #Culling population back to initial size
         print('**Culling population**')
-        #print('population before:', current_population.fuzzer_sets)
         #Log size of pop before cull then cull then log size after
         precullNumber = len(current_population.fuzzer_sets)
         current_population.fuzzer_sets = perform_selection(current_population, selection_type = 'survival')
@@ -171,10 +171,25 @@ if __name__ == "__main__":
     outputFile = 'EvolutionOut.txt'
     data_out = open(outputFile, 'w')
     printItem = current_population.fuzzer_sets
-    for setNum in printItem:
-        data_out.write(str(setNum.string_set))
+
+    best_set = []
+    best_set_fitness = []
+    for setNum in range(len(printItem)):
+        if setNum == 0:
+            best_set_fitness = printItem[setNum].fitness
+            best_set = printItem[setNum].string_set
+        else:
+            if printItem[setNum].fitness > best_set_fitness:
+                best_set_fitness = printItem[setNum].fitness
+                best_set = printItem[setNum].string_set
+        data_out.write(str(printItem[setNum].fitness))
+        data_out.write(str(printItem[setNum].string_set))
         data_out.write('\n')
 
+    # Log strings and matrix in runLog/0_0
+    fuzz.testStrings(_custom_input = best_set)
+    print('Best Strings:', best_set)
+    print('Best Fitness:', best_set_fitness)
     
 
     
