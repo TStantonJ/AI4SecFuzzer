@@ -157,17 +157,23 @@ if __name__ == "__main__":
         #Culling population back to initial size
         print('**Culling population**')
         #print('population before:', current_population.fuzzer_sets)
+        #Log size of pop before cull then cull then log size after
         precullNumber = len(current_population.fuzzer_sets)
         current_population.fuzzer_sets = perform_selection(current_population, selection_type = 'survival')
         postcullNumber = len(current_population.fuzzer_sets)
+        # Update population_size with actually size
         current_population.population_size = precullNumber - (precullNumber-postcullNumber)
         print('Culled # of individuals:', precullNumber-postcullNumber)
         print('Population Size:', current_population.population_size)
-        #print('\n\n\n\npopulation After:', current_population.fuzzer_sets)
-        #print(f"Deleted {cull_population(current_population)} from population.")
 
-    # Print strings of population at end
+    # Print strings of population at end to file called EvolutionOut.txt
     print('\n\nFinal Sets:',current_population.fuzzer_sets)
+    outputFile = 'EvolutionOut.txt'
+    data_out = open(outputFile, 'w')
+    printItem = current_population.fuzzer_sets
+    for setNum in printItem:
+        data_out.write(str(setNum.string_set))
+        data_out.write('\n')
 
     
 
