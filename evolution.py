@@ -11,6 +11,8 @@ INITIAL_POPULATION = int(config["INITIAL_POPULATION"])
 STRINGS_PER_SET = int(config["STRINGS_PER_SET"])
 SELECTION_SIZE = int(config["SELECTION_SIZE"])
 NUMBER_OF_CHILDREN = int(config["NUMBER_OF_CHILDREN"])
+PARENT_SELECTION_SIZE = int(config["PARENT_SELECTION_SIZE"])
+TOURNAMENT_SIZE = int(config["TOURNAMENT_SIZE"])
 POPULATION_SIZE = int(config["POPULATION_SIZE"])
 # PERCENTAGE_SELECTED = int(config["PERENTAGE_SELECTED"])
 # MATING_PERCENT = int(INITIAL_POPULATION - (PERCENTAGE_SELECTED)(INITIAL_POPULATION)) #FOR POC--- probably needs to change
@@ -30,9 +32,9 @@ def evaluate_fitness(population, evaluation_function):
 def perform_selection(population, selection_type):
     fuzzer_sets = population.fuzzer_sets
     if selection_type == 'survival':
-        return selection.k_tournament_without_replacement(fuzzer_sets, n = INITIAL_POPULATION)
+        return selection.k_tournament_without_replacement(fuzzer_sets, n = INITIAL_POPULATION, k = TOURNAMENT_SIZE)
     elif selection_type == 'parent':
-        return selection.k_tournament_with_replacement(fuzzer_sets, SELECTION_SIZE)
+        return selection.k_tournament_with_replacement(fuzzer_sets, PARENT_SELECTION_SIZE)
 
 
 #Finds and sets the best fitness to the population. Also calculates average fitness.
