@@ -5,6 +5,9 @@ config = \
 "EVALUATIONS" : 10,
 #Number of string sets for initial population
 "INITIAL_POPULATION" : 50,
-"STRINGS_PER_SET" : 10
+"STRINGS_PER_SET" : 10,
+#PERCENT OF POPULATION THAT STAYS
+"PERCENT_SELECTED" : 80,
+
 }
 

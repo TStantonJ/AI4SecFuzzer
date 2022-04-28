@@ -31,7 +31,7 @@ def mutate_set(set_of_strings, neighbors = DEFAULT_NEIGHBORS_GENERATED):
     mutations = abs(int(numpy.random.normal(0,16.6)))
     temp = copy.deepcopy(set_of_strings)
     new_list = []
-    for _ in range(DEFAULT_NEIGHBORS_GENERATED):
+    for _ in range(neighbors):
         new_list.append(get_neighbors(temp))
     
     for _ in range(mutations):

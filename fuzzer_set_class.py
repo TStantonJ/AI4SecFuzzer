@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field, asdict
 
-
+#Refer to the MD file for reference
 @dataclass
 class fuzzer_set:
     string_set : list =  field(default_factory = list)
@@ -8,9 +8,21 @@ class fuzzer_set:
     fitness : int = field(default = 0)
     set_number : int = field(default = 0)
 
+@dataclass
+class population:
+    #list of the actual population(fuzzer sets. The fuzzer sets contain the list of strings)
+    fuzzer_sets : list = field(default_factory = list)
+    number_of_children : int = field(default = 0)
+    population_size : int = field(default = 0)
+    best_fitness : int = field(default = int)
+    best_fitness_fuzz_set : list = field(default = list)
 
+    #Sets population size. 
+    def __post_init__(self):
+        self.population_size = len(self.fuzzer_sets)
+    
 
-
+#Example of how to create and operate on the classes
 if __name__ == "__main__":
     #Set of nosj strings
     foo = ["{A:B}", "{B:C}"]
