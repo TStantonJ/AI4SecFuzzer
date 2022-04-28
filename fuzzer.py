@@ -58,7 +58,8 @@ nest_cnt = 0
 
 #------------ Main control ------------
 def main(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custom_input = None):
-    testStrings(_runNum = _runNum, _evalNum = _evalNum, _outputDirectory = _outputDirectory, _custom_input = _custom_input)
+    fitness = testStrings(_runNum = _runNum, _evalNum = _evalNum, _outputDirectory = _outputDirectory, _custom_input = _custom_input)
+    return fitness
 
 def testStrings(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custom_input = None):
     
