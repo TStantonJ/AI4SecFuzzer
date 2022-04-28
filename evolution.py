@@ -25,11 +25,14 @@ def evaluate_fitness(population, evaluation_function):
 
 
 
-#TODO: Implement a better selection
-#Right now randomly selects people to win
-def perform_selection(population):
+#Finds individuals from a given population. 
+#Call with a population and which type of selection being perfomred( survival or parent )
+def perform_selection(population, selection_type):
     fuzzer_sets = population.fuzzer_sets
-    return selection.uniform_random_selection(fuzzer_sets, SELECTION_SIZE)
+    if selection_type == 'survival':
+        return selection.k_tournament_without_replacement(fuzzer_sets, n = INITIAL_POPULATION)
+    elif selection_type == 'parent':
+        return selection.k_tournament_with_replacement(fuzzer_sets, SELECTION_SIZE)
 
 
 #Finds and sets the best fitness to the population. Also calculates average fitness.
@@ -90,7 +93,7 @@ def combine_and_add_children(population, selection):
 def cull_population(population):
     #Sorts fuzz sets by fitness.
     fuzz_sets = population.fuzzer_sets
-    sorted_population = sorted(fuzz_sets, key = fs.fuzzer_set.__eq__)
+    sorted_population = sorted(fuzz_sets, key = fs.fuzzer_set.findFitness)
     #Sets amount of sets to cull according to population size
     amount_to_cull = population.population_size - POPULATION_SIZE
 
@@ -101,7 +104,7 @@ def cull_population(population):
         print(f"ERROR, population less than {POPULATION_SIZE}")
         exit
 
-    population.fuzzer_sets = sorted_population[amount_to_cull - 1: -1]
+    population.fuzzer_sets = sorted_population[amount_to_cull - 1: len(sorted_population)]
     population.population_size = len(population.fuzzer_sets)
     population.number_of_children = 0
     return amount_to_cull
@@ -126,12 +129,12 @@ if __name__ == "__main__":
     #LOOP UNTIL CONVERGANCE. TODO: REPLACE WHILE FUNCTION WITH A CONVERGENCE FUNCTION
 
     generation = 0
-    while generation < 4:
+    while generation < 50:
         generation += 1
         print(f"-------------Generation {generation}----------------")
         #Selects the population for reproduction
         print("**Starting selection process of population**")
-        parents = perform_selection(current_population)
+        parents = perform_selection(current_population, selection_type = 'parent')
 
         #Creates children and updates population accordingly with selection
         print("**Starting children generation process**")
@@ -152,7 +155,19 @@ if __name__ == "__main__":
         print(f"Average fitness of generation {generation} : {current_population.average_fitness}")
         ("**Culling population back to size**")
         #Culling population back to initial size
-        print(f"Deleted {cull_population(current_population)} from population.")
+        print('**Culling population**')
+        #print('population before:', current_population.fuzzer_sets)
+        precullNumber = len(current_population.fuzzer_sets)
+        current_population.fuzzer_sets = perform_selection(current_population, selection_type = 'survival')
+        postcullNumber = len(current_population.fuzzer_sets)
+        current_population.population_size = precullNumber - (precullNumber-postcullNumber)
+        print('Culled # of individuals:', precullNumber-postcullNumber)
+        print('Population Size:', current_population.population_size)
+        #print('\n\n\n\npopulation After:', current_population.fuzzer_sets)
+        #print(f"Deleted {cull_population(current_population)} from population.")
+
+    # Print strings of population at end
+    print('\n\nFinal Sets:',current_population.fuzzer_sets)
 
     
 
