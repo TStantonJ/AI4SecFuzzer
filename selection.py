@@ -19,7 +19,7 @@ def uniform_random_selection(population, n, **kwargs):
 # -Takes a population, how many individuals(n) to return from it, and how many individuals
 #   should be in a tournament(k)
 # -Returns n individuals who won their k sized tournaments(can win multiple times)
-def k_tournament_with_replacement(population, n, **kwargs):
+def k_tournament_with_replacement(population, n, k = 5):
 	# Initalize pool of chosen parents
 	winners_bracket = []
 	
@@ -32,7 +32,7 @@ def k_tournament_with_replacement(population, n, **kwargs):
 			holder.append(individual)
 
 		# Destructively draw k individuals from population holder
-		tourney = random.sample(holder, kwargs.get('k'))
+		tourney = random.sample(holder, k)
         # Best Fighter's fitness variable
 		best_fighter = 0
 		# Hold a brawl between the k chosen individuals
@@ -57,7 +57,7 @@ def k_tournament_with_replacement(population, n, **kwargs):
 # K Tournament without Replacement Selection
 # -Takes a population, how many individuals(n) to return from it, and tournament size(k)
 # -Returns n individuals who won their k sized tournaments(can not win multiple times)
-def k_tournament_without_replacement(population, n, **kwargs):
+def k_tournament_without_replacement(population, n, k = 5):
 	winners_bracket = []
 	# Copy population
 	#holder = [copy.deepcopy(x) for x in population]
@@ -66,7 +66,7 @@ def k_tournament_without_replacement(population, n, **kwargs):
 		holder.append(individual)
 
 	# Make sure tournament size isn't too small
-	if kwargs.get('k') >= len(population) - n + 1:
+	if k >= len(population) - n + 1:
 		raise Exception('k >= popsize - selecsize + 1')
 	
 	# Itterator how how many winners there should be
@@ -76,23 +76,25 @@ def k_tournament_without_replacement(population, n, **kwargs):
 		holder = []
 		for individual in population:
 			if individual not in winners_bracket:
+				#print('individual:', individual)
+				#print('\nWinners:', winners_bracket)
 				holder.append(individual)
 
 		# Destructively draw k individuals from population holder
-		tourney = random.sample(holder, kwargs.get('k'))
+		tourney = random.sample(holder, k)
 		best_fighter = None
 
 		# Hold a brawl between the k chosen individuals
 		for i in range(len(tourney)):
 			# Fist one always is the best fighter in the first round unless it already won
-			if best_fighter == None:
+			if best_fighter is None:
 				if tourney[i] in winners_bracket:
 					pass
 				else:
 					best_fighter = tourney[i]
 
 			# Compare to previous best fighter unless there is none or someone like has won already
-			if best_fighter != None:
+			if best_fighter is not None:
 				if tourney[i].fitness > best_fighter.fitness:
 					if tourney[i] in winners_bracket:
 						pass
@@ -100,7 +102,7 @@ def k_tournament_without_replacement(population, n, **kwargs):
 						best_fighter = tourney[i]
 
 		# Add winner to the bracket unless there is none
-		if best_fighter != None:
+		if best_fighter is not None:
 			winners_bracket.append(best_fighter)
 			current_member += 1
 
