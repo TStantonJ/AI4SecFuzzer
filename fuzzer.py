@@ -148,6 +148,9 @@ def testStrings(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custo
             else:
                     data_out.write('\t\t-')
         data_out.write('\n')
+    data_out.write('\nNumber of Strings used: ')
+    data_out.write(str(len(input_strings)))
+    data_out.write('\n')
     data_out.write('\nStrings used:\n')
     for string in input_strings:
         data_out.write(string)
