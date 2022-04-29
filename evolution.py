@@ -11,9 +11,8 @@ INITIAL_POPULATION = int(config["INITIAL_POPULATION"])
 STRINGS_PER_SET = int(config["STRINGS_PER_SET"])
 SELECTION_SIZE = int(config["SELECTION_SIZE"])
 NUMBER_OF_CHILDREN = int(config["NUMBER_OF_CHILDREN"])
-PARENT_SELECTION_SIZE = int(config["PARENT_SELECTION_SIZE"])
-TOURNAMENT_SIZE = int(config["TOURNAMENT_SIZE"])
 POPULATION_SIZE = int(config["POPULATION_SIZE"])
+CONVERGENCE_PERCENT = float(config["CONVERGENCE_PERCENT"])
 # PERCENTAGE_SELECTED = int(config["PERENTAGE_SELECTED"])
 # MATING_PERCENT = int(INITIAL_POPULATION - (PERCENTAGE_SELECTED)(INITIAL_POPULATION)) #FOR POC--- probably needs to change
 
@@ -32,9 +31,9 @@ def evaluate_fitness(population, evaluation_function):
 def perform_selection(population, selection_type):
     fuzzer_sets = population.fuzzer_sets
     if selection_type == 'survival':
-        return selection.k_tournament_without_replacement(fuzzer_sets, n = INITIAL_POPULATION, k = TOURNAMENT_SIZE)
+        return selection.k_tournament_without_replacement(fuzzer_sets, n = INITIAL_POPULATION)
     elif selection_type == 'parent':
-        return selection.k_tournament_with_replacement(fuzzer_sets, PARENT_SELECTION_SIZE)
+        return selection.k_tournament_with_replacement(fuzzer_sets, SELECTION_SIZE)
 
 
 #Finds and sets the best fitness to the population. Also calculates average fitness.
@@ -90,6 +89,32 @@ def combine_and_add_children(population, selection):
     population.population_size += number_of_children
     population.highest_set_number = starting_set_number + number_of_children
     return children
+
+
+#Convergence tester
+#From the last 3 generation's (TODO) if the best fitness is consistently closer to the average fitness
+def test_convergence(population):
+
+    conv_per = CONVERGENCE_PERCENT
+    #conv_per = 3
+
+    #TODO will have to do the 'consistent' part later but just average comparison now
+    #That has some complexity
+    #if len(population.fuzzer_set) <= 3:
+        #return false
+
+    distance = population.best_fitness - population.average_fitness
+
+    #print("CONV "+ str(distance) + " % " + str(population.average_fitness*conv_per/100) + "REf Perc" + str(conv_per))
+
+    #if the distnace is x% from the average
+    if distance <= population.average_fitness*conv_per/100:
+        return True
+    else:
+        return False
+
+
+
 
 #TODO implement a better way of keeping the population a certain number. For now removes the worst fitness sets until it reaches 50.
 def cull_population(population):
@@ -155,6 +180,11 @@ if __name__ == "__main__":
         set_best_fitness(current_population)
         print(f"Best current fitness of generation {generation}: {current_population.best_fitness}")
         print(f"Average fitness of generation {generation} : {current_population.average_fitness}")
+
+        if test_convergence(current_population) == True :
+            print ("Converged!!!!")
+            break
+
         ("**Culling population back to size**")
         
         #Culling population back to initial size
