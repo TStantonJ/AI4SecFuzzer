@@ -22,6 +22,7 @@ CONVERGENCE_PERCENT = float(config["CONVERGENCE_PERCENT"])
 def evaluate_fitness(population, evaluation_function):
     for fuzzer_set in population.fuzzer_sets:
         evaluation = evaluation_function(_custom_input = fuzzer_set.string_set)
+        #print(len(fuzzer_set.string_set))
         fuzzer_set.fitness = evaluation
 
 
@@ -60,10 +61,10 @@ def set_best_fitness(population):
 def create_initial_population(initial_population_length = INITIAL_POPULATION):
     initial_population = []
     #Uses the fuzzer class to generate random strings for population
-    for i in range(INITIAL_POPULATION):
+    for i in range(initial_population_length):
         initial_population.append(fs.fuzzer_set(string_set = fuzz.generateStrings("random", STRINGS_PER_SET), set_number = i))
     
-    return fs.population(fuzzer_sets = initial_population, highest_set_number = INITIAL_POPULATION)
+    return fs.population(fuzzer_sets = initial_population, highest_set_number = initial_population_length)
 
 #Takes in the selection created by selection function and adds them to population
 def combine_and_add_children(population, selection):
@@ -174,17 +175,15 @@ if __name__ == "__main__":
         print(temp)
         print("A total of {} mutations occured during the process".format(children_mutations))
 
-        print("**Evaluating fitness of population**")
         
         #Gets fitness of combined
         evaluate_fitness(current_population, fuzz.testStrings)
         set_best_fitness(current_population)
 
-        ("**Culling population back to size**")
-        
+
         #Culling population back to initial size
-        print('**Culling population**')
-        #Log size of pop before cull then cull then log size after
+        print("**Culling population back to size**")
+        #Log size of pop before cull, then cull, then log size after
         precullNumber = len(current_population.fuzzer_sets)
         current_population.fuzzer_sets = perform_selection(current_population, selection_type = 'survival')
         postcullNumber = len(current_population.fuzzer_sets)
@@ -195,6 +194,7 @@ if __name__ == "__main__":
 
 
         #Reevalute final population fitness
+        print("**Evaluating fitness of population**") 
         evaluate_fitness(current_population, fuzz.testStrings)
         set_best_fitness(current_population)
         print(f"Best current fitness of generation {generation}: {current_population.best_fitness}")
@@ -206,7 +206,7 @@ if __name__ == "__main__":
             break
 
     # Print strings of population at end to file called EvolutionOut.txt
-    print('\n\nFinal Sets:',current_population.fuzzer_sets)
+    #print('\n\nFinal Sets:',current_population.fuzzer_sets)
     outputFile = 'EvolutionOut.txt'
     data_out = open(outputFile, 'w')
     printItem = current_population.fuzzer_sets
@@ -221,7 +221,10 @@ if __name__ == "__main__":
             if printItem[setNum].fitness > best_set_fitness:
                 best_set_fitness = printItem[setNum].fitness
                 best_set = printItem[setNum].string_set
+        data_out.write('Fitness:')
         data_out.write(str(printItem[setNum].fitness))
+        data_out.write('||len')
+        data_out.write(str(len(printItem[setNum].string_set)))
         data_out.write(str(printItem[setNum].string_set))
         data_out.write('\n')
 
