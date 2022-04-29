@@ -1,6 +1,7 @@
 
 import base64
 from curses import A_ALTCHARSET
+from logging import exception
 from pickletools import markobject
 import random
 import argparse
@@ -14,6 +15,10 @@ import importlib
 from exceptions import SerializationError, DeserializationError
 import sys
 import time
+from config import config
+
+
+DEFAULT_EXEPTION_WEIGHT = config["DEFAULT_EXEPTION_WEIGHT"]
 
 # TODO:
 # New matrix recording system (TS)
@@ -154,7 +159,7 @@ def testStrings(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custo
 #TODO: Add fitness penalty for strings near 150 len
 # Take a result dictonary and weights for exceptions caused and implementations broken(Ideally when summed, weights = 1.0)
 # Returns fitness of given dictionary out of 100
-def getFitness(_input_dict, _exception_weight = 0.5, _implementation_weight = 0.5):
+def getFitness(_input_dict, _alpha = DEFAULT_EXEPTION_WEIGHT):
     errors = ['<class \'NameError\'>', '<class \'KeyError\'>', '<class \'ValueError\'>',
         '<class \'SyntaxError\'>', '<class \'IndexError\'>', '<class \'json.decoder.JSONDecodeError\'>',
         '<class \'RecursionError\'>',  '<class \'UnboundLocalError\'>', '<class \'AttributeError\'>']
@@ -180,7 +185,7 @@ def getFitness(_input_dict, _exception_weight = 0.5, _implementation_weight = 0.
                 real_exception_amount += 1  
     exception_fitness = real_exception_amount/possible_exception_amount
 
-    fitness = (implementation_fitness * _implementation_weight) + (exception_fitness * _exception_weight)
+    fitness = (implementation_fitness * 1-_alpha) + (exception_fitness * _alpha)
     return fitness*100
 
 # Function that builds a list of input strings

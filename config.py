@@ -15,7 +15,8 @@ config = \
 #Mutation rate out of 100, will mutate the child 
 "MUTATION_RATE" : 10,
 #Convergence percent distance from the average 
-"CONVERGENCE_PERCENT" : 2
+"CONVERGENCE_PERCENT" : 2,
+"DEFAULT_EXEPTION_WEIGHT" : 0.7
 }
 
 
