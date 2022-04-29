@@ -175,15 +175,10 @@ if __name__ == "__main__":
         print("A total of {} mutations occured during the process".format(children_mutations))
 
         print("**Evaluating fitness of population**")
-        #Gets fitness of new population
+        
+        #Gets fitness of combined
         evaluate_fitness(current_population, fuzz.testStrings)
         set_best_fitness(current_population)
-        print(f"Best current fitness of generation {generation}: {current_population.best_fitness}")
-        print(f"Average fitness of generation {generation} : {current_population.average_fitness}")
-
-        if test_convergence(current_population) == True :
-            print ("Converged!!!!")
-            break
 
         ("**Culling population back to size**")
         
@@ -197,6 +192,18 @@ if __name__ == "__main__":
         current_population.population_size = precullNumber - (precullNumber-postcullNumber)
         print('Culled # of individuals:', precullNumber-postcullNumber)
         print('Population Size:', current_population.population_size)
+
+
+        #Reevalute final population fitness
+        evaluate_fitness(current_population, fuzz.testStrings)
+        set_best_fitness(current_population)
+        print(f"Best current fitness of generation {generation}: {current_population.best_fitness}")
+        print(f"Average fitness of generation {generation} : {current_population.average_fitness}")
+
+        # Test for convergence
+        if test_convergence(current_population) == True :
+            print ("Converged!!!!")
+            break
 
     # Print strings of population at end to file called EvolutionOut.txt
     print('\n\nFinal Sets:',current_population.fuzzer_sets)
@@ -220,7 +227,7 @@ if __name__ == "__main__":
 
     # Log strings and matrix in runLog/0_0
     fuzz.testStrings(_custom_input = best_set)
-    print('Best Strings:', best_set)
+    #print('Best Strings:', best_set)
     print('Best Fitness:', best_set_fitness)
     
 
