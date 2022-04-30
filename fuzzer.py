@@ -188,7 +188,7 @@ def getFitness(_input_dict, _alpha = DEFAULT_EXEPTION_WEIGHT):
                 real_exception_amount += 1  
     exception_fitness = real_exception_amount/possible_exception_amount
 
-    fitness = (implementation_fitness * 1-_alpha) + (exception_fitness * _alpha)
+    fitness = (implementation_fitness * (1-_alpha)) + (exception_fitness * _alpha)
     return fitness*100
 
 # Function that builds a list of input strings
