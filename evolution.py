@@ -137,10 +137,9 @@ def cull_population(population):
     population.number_of_children = 0
     return amount_to_cull
 
-
-
-
-if __name__ == "__main__":
+def evolutionDriver(_evalNum = 0, _runNum = 0):
+    # Data logging variables
+    best_fitness_at_gen = []
 
     print("**Creating initial population**")
     #Creates initial population
@@ -151,7 +150,8 @@ if __name__ == "__main__":
     set_best_fitness(current_population)
     print(f"Best fitness of initial population: {current_population.best_fitness}")
     print(f"Average fitness of initial population: {current_population.average_fitness}")
-
+    # Log data
+    best_fitness_at_gen.append(current_population.best_fitness)
 
 
     #LOOP UNTIL CONVERGANCE. TODO: REPLACE WHILE FUNCTION WITH A CONVERGENCE FUNCTION
@@ -193,12 +193,14 @@ if __name__ == "__main__":
         print('Population Size:', current_population.population_size)
 
 
-        #Reevalute final population fitness
+        #Re-evalute final population fitness
         print("**Evaluating fitness of population**") 
         evaluate_fitness(current_population, fuzz.testStrings)
         set_best_fitness(current_population)
         print(f"Best current fitness of generation {generation}: {current_population.best_fitness}")
         print(f"Average fitness of generation {generation} : {current_population.average_fitness}")
+        # Log data
+        best_fitness_at_gen.append(current_population.best_fitness)
 
         # Test for convergence
         if test_convergence(current_population) == True :
@@ -229,9 +231,18 @@ if __name__ == "__main__":
         data_out.write('\n')
 
     # Log strings and matrix in runLog/0_0
-    fuzz.testStrings(_custom_input = best_set)
+    fuzz.testStrings(_evalNum = _evalNum, _runNum = _runNum, _custom_input = best_set)
     #print('Best Strings:', best_set)
     print('Best Fitness:', best_set_fitness)
+
+    return (best_set_fitness, best_fitness_at_gen,generation)
+
+
+
+
+if __name__ == "__main__":
+    evolutionDriver()
+    
     
 
     
