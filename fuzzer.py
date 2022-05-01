@@ -165,7 +165,7 @@ def testStrings(_runNum = 0, _evalNum = 0, _outputDirectory = './runLog', _custo
 def getFitness(_input_dict, _alpha = DEFAULT_EXEPTION_WEIGHT):
     errors = ['<class \'NameError\'>', '<class \'KeyError\'>', '<class \'ValueError\'>',
         '<class \'SyntaxError\'>', '<class \'IndexError\'>', '<class \'json.decoder.JSONDecodeError\'>',
-        '<class \'RecursionError\'>',  '<class \'UnboundLocalError\'>', '<class \'AttributeError\'>']
+        '<class \'RecursionError\'>',  '<class \'UnboundLocalError\'>', '<class \'AttributeError\'>', '<class \'TypeError\'>']
 
     # Look at number of implementations broken
     implementation_score_list = []
