@@ -19,7 +19,7 @@ config = \
 "MUTATION_RATE" : 10,
 #Convergence percent distance from the average 
 "CONVERGENCE_PERCENT" : 2,
-"DEFAULT_EXEPTION_WEIGHT" : 0.7
+"DEFAULT_EXEPTION_WEIGHT" : 0.5
 }
 
 
