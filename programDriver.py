@@ -12,10 +12,10 @@ import evolution
 STRINGS_PER_SET = int(config["STRINGS_PER_SET"])
 
 # Define runs and evals/run
-NUMBER_OF_RUNS = 2
+NUMBER_OF_RUNS = 30
 NUMBER_OF_ASSESSMENTS  = 40
 
-#TODO: add convergence and update graph labels
+#TODO: add convergence
 def randomSearch():
     # Data storage for information that lasts more than one run
     best_run_holder = []        # Holds list of best_eval_holders
@@ -82,7 +82,7 @@ def randomSearch():
             plt.plot(bestxpoints, bestypoints)
     plt.xlabel('Evaluation')
     plt.ylabel('Best Fitness Seen')
-    #plt.title('Best Fitness Seen Graph for all Runs')
+    plt.title('Random Search: Best Fitness for all Runs')
     fig1 = plt.figure()
 
     # Best Graph
@@ -90,7 +90,7 @@ def randomSearch():
     overallbestypoint = best_run
     plt.xlabel('Evaluation')
     plt.ylabel('Best Fitness Seen')
-    plt.title('Best Fitness Seen Graph for Best Run')
+    plt.title('Random Search: Best Fitness for Best Run')
     plt.plot(overallbestxpoint,overallbestypoint)
 
     # Box plot graph
@@ -103,6 +103,7 @@ def randomSearch():
     fig, ax = plt.subplots()
     ax.set_xlabel('Evaluation')
     ax.set_ylabel('Fitness Range')
+    ax.set_title('Random Search: Variation of Best Fitness accross all Runs')
     ax.boxplot(data_holder)
     # Show graphs
 
@@ -115,7 +116,7 @@ def randomSearch():
     fig.canvas.set_window_title('Figure 3')
     plt.show()
 
-# TODO: add convergence and update graph labels
+# TODO: add convergence
 def hillClimb():
     best_run_holder = []        # Holds list of best_eval_holders
     general_run_holder = []     # Holds list of results of each eval per run
@@ -270,13 +271,6 @@ def EASearch():
 
     # Format data to account for different generation end numbers
     longest_generation = max(generation_number_logger)
-
-    for run in range(len(best_run_holder)):
-        run_length = len(best_run_holder[run])
-        print('Run',str(run),' converged at generation', str(run_length))
-        while len(best_run_holder[run]) < longest_generation:
-            tmp_val = best_run_holder[run][len(best_run_holder[run])-1]
-            best_run_holder[run].append(tmp_val)
     
     # Graph of best fitness seen by eval for every runs
     for run in range(len(best_run_holder)):
@@ -286,7 +280,7 @@ def EASearch():
             plt.plot(bestxpoints, bestypoints, label=runLabel)
     plt.xlabel('Generation')
     plt.ylabel('Best Fitness Seen')
-    #plt.title('Best Fitness Seen Graph for all Runs')
+    plt.title('EA: Best Fitness for all Runs')
     fig1 = plt.figure()
 
     # Best Graph
@@ -294,8 +288,18 @@ def EASearch():
     overallbestypoint = best_run
     plt.xlabel('Generation')
     plt.ylabel('Best Fitness Seen')
-    plt.title('Best Fitness Seen Graph for Best Run')
+    plt.title('EA: Best Fitness for Best Run')
     plt.plot(overallbestxpoint,overallbestypoint)
+
+
+    # Extrapolate shorter generation length runs for box plot
+    for run in range(len(best_run_holder)):
+        run_length = len(best_run_holder[run])
+        print('Run',str(run),' converged at generation', str(run_length))
+        while len(best_run_holder[run]) < longest_generation:
+            tmp_val = best_run_holder[run][len(best_run_holder[run])-1]
+            best_run_holder[run].append(tmp_val)
+
 
     # Box plot graph
     data_holder = []
@@ -305,8 +309,9 @@ def EASearch():
                 average_at_eval.append(best_run_holder[run][eval_num])
         data_holder.append(average_at_eval)
     fig, ax = plt.subplots()
-    ax.set_xlabel('Evaluation')
+    ax.set_xlabel('Generation')
     ax.set_ylabel('Fitness Range')
+    ax.set_title('EA: Variation of Best Fitness accross all Runs')
     ax.boxplot(data_holder)
     # Show graphs
 
