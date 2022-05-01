@@ -9,6 +9,7 @@ from config import config
 
 
 MUTATION_RATE = int(config["MUTATION_RATE"])
+MAXIMUM_STRINGS_PER_SET = int(config["MAXIMUM_STRINGS_PER_SET"])
 
 #POC for combination. Will randomly mutate from neighbor
 #Implements fuzzer set class
@@ -20,6 +21,9 @@ def combine(parent1, parent2):
     #Chooses a length for the child. Length can vary but is based off parent.
     #TODO REDIFINE CHILD_LENGTH
     child_length = int(numpy.random.normal(average_parent_length, 3))
+    #Limits the length of child
+    if child_length > MAXIMUM_STRINGS_PER_SET:
+        child_length = MAXIMUM_STRINGS_PER_SET
     mutation_count = 0
     #Randomly chooses from both sets of strings of both parents
     for i in range(child_length):

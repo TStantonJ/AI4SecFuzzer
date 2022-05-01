@@ -117,31 +117,31 @@ def test_convergence(population):
 
 
 
-#TODO implement a better way of keeping the population a certain number. For now removes the worst fitness sets until it reaches 50.
-def cull_population(population):
-    #Sorts fuzz sets by fitness.
-    fuzz_sets = population.fuzzer_sets
-    sorted_population = sorted(fuzz_sets, key = fs.fuzzer_set.findFitness)
-    #Sets amount of sets to cull according to population size
-    amount_to_cull = population.population_size - POPULATION_SIZE
+# #TODO implement a better way of keeping the population a certain number. For now removes the worst fitness sets until it reaches 50.
+# def cull_population(population):
+#     #Sorts fuzz sets by fitness.
+#     fuzz_sets = population.fuzzer_sets
+#     sorted_population = sorted(fuzz_sets, key = fs.fuzzer_set.findFitness)
+#     #Sets amount of sets to cull according to population size
+#     amount_to_cull = population.population_size - POPULATION_SIZE
 
-    if amount_to_cull == 0:
-        print("No need to cull")
-        return
-    elif amount_to_cull < 0:
-        print(f"ERROR, population less than {POPULATION_SIZE}")
-        exit
+#     if amount_to_cull == 0:
+#         print("No need to cull")
+#         return
+#     elif amount_to_cull < 0:
+#         print(f"ERROR, population less than {POPULATION_SIZE}")
+#         exit
 
-    population.fuzzer_sets = sorted_population[amount_to_cull - 1: len(sorted_population)]
-    population.population_size = len(population.fuzzer_sets)
-    population.number_of_children = 0
-    return amount_to_cull
+#     population.fuzzer_sets = sorted_population[amount_to_cull - 1: len(sorted_population)]
+#     population.population_size = len(population.fuzzer_sets)
+#     population.number_of_children = 0
+#     return amount_to_cull
 
 def evolutionDriver(_evalNum = 0, _runNum = 0):
     # Data logging variables
     best_fitness_at_gen = []
-
     print("**Creating initial population**")
+    
     #Creates initial population
     current_population = create_initial_population()
     print(f"Current Population size: {current_population.population_size}")

@@ -5,7 +5,10 @@ config = \
 "EVALUATIONS" : 10,
 #Number of string sets for initial population
 "INITIAL_POPULATION" : 50,
+#STRINGS PER SET IN THE INITIAL POPULATION
 "STRINGS_PER_SET" : 10,
+#MAXIMUM ALLOWED STRINGS IN A FUZZING SET
+"MAXIMUM_STRINGS_PER_SET" : 50,
 #PERCENT OF POPULATION THAT STAYS
 "PERCENT_SELECTED" : 80,
 #Amount of the population selected to win(For selection)
