@@ -27,8 +27,11 @@ def combine(parent1, parent2):
     mutation_count = 0
     #Randomly chooses from both sets of strings of both parents
     for i in range(child_length):
+        if len(parent_genes) <= 0:
+            break
         gene = random.choice(parent_genes)
-        parent_genes.remove(gene)
+        while gene in parent_genes:
+            parent_genes.remove(gene)
         #Chance to do mutations with combination
         if MUTATION_RATE > random.choice(range(0,100)):
             gene = mutate(gene)

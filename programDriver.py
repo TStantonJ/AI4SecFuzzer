@@ -1,5 +1,4 @@
 from re import L
-
 from numpy import average
 import fuzzer as fuzz
 import matplotlib.pyplot as plt
@@ -18,11 +17,11 @@ NUMBER_OF_ASSESSMENTS  = 40
 #TODO: add convergence
 def randomSearch():
     # Data storage for information that lasts more than one run
-    best_run_holder = []        # Holds list of best_eval_holders
     general_run_holder = []     # Holds list of results of each eval per run
-    best_run_fitness = 0.00
-    best_run = []
-    best_run_info = ''
+    best_run_holder = []            # Holds list of run longs
+    best_run_fitness = 0.00         # Holds best fitness value seen
+    best_run = []                   # Holds best run log
+    best_run_info = ''              # Holds best run log location
 
     # Collect 30 runs of data
     for run in range(NUMBER_OF_RUNS):
@@ -39,10 +38,10 @@ def randomSearch():
         # Collect NUMBER_OF_EVALS evals of data per run
         for assessment in range(NUMBER_OF_ASSESSMENTS):
             # Run fuzzer and have it gernate new strings each assesment
-            print('\t\t\t\t\tCurrent Eval :',eval, end='\r')
+            print('\t\t\t\t\tCurrent Eval :',assessment, end='\r')
             time.sleep(0.001)
-            set_holder = fuzz.generateStrings("random", STRINGS_PER_SET)
-            result = fuzz.testStrings(_runNum=run,_evalNum=eval, _custom_input = set_holder)
+            set_holder = fuzz.generateStrings("random", 50)
+            result = fuzz.testStrings(_runNum=run,_evalNum=assessment, _custom_input = set_holder)
 
             # Test if new string set is better than old
             if assessment == 0:
@@ -52,7 +51,7 @@ def randomSearch():
                 if best_eval < result:
                     best_string = set_holder
                     best_eval = result
-                    best_eval_info = str(run) + '__' + str(eval)
+                    best_eval_info = str(run) + '__' + str(assessment)
             #Log evaluation result       
             best_eval_holder.append(best_eval)
             general_eval_holder.append(result)
@@ -118,10 +117,11 @@ def randomSearch():
 
 # TODO: add convergence
 def hillClimb():
-    best_run_holder = []        # Holds list of best_eval_holders
-    general_run_holder = []     # Holds list of results of each eval per run
-    best_run_fitness = 0.00
-    best_run = []
+    # Data storage for information that lasts more than one run
+    best_run_holder = []            # Holds list of run longs
+    best_run_fitness = 0.00         # Holds best fitness value seen
+    best_run = []                   # Holds best run log
+    best_run_info = ''              # Holds best run log location
     best_run_info = ''
 
     # Collect 30 runs of data
@@ -134,9 +134,9 @@ def hillClimb():
         best_eval_info = ''             # Hold run and eval num of best
 
         # Collect NUMBER_OF_EVALS evals of data per run
-        for eval in range(NUMBER_OF_ASSESSMENTS):
+        for assessment in range(NUMBER_OF_ASSESSMENTS):
             # Run fuzzer
-            print('\t\t\t\t\tCurrent Eval :',eval, end='\r')
+            print('\t\t\t\t\tCurrent Eval :',assessment, end='\r')
             time.sleep(0.001)
 
             starting_string = fuzz.generateStrings('random', 50)
@@ -172,11 +172,11 @@ def hillClimb():
             if best_string_fitness < starting_string_fitness:
                 best_string = starting_string
                 best_string_fitness = starting_string_fitness
-            result = fuzz.main(_custom_input = best_string, _runNum=run, _evalNum=eval)
+            result = fuzz.main(_custom_input = best_string, _runNum=run, _evalNum=assessment)
             # Update best eval so far
             if float(result) > float(best_eval):
                 best_eval = result
-                best_eval_info = str(run) + '__' + str(eval)
+                best_eval_info = str(run) + '__' + str(assessment)
             best_eval_holder.append(best_eval)
             # Always add eval to data from this run
             general_eval_holder.append(result)
@@ -190,7 +190,7 @@ def hillClimb():
         
         # Add last run to run storage
         best_run_holder.append(best_eval_holder)
-        general_run_holder.append(general_eval_holder)
+        #general_run_holder.append(general_eval_holder)
 
 
     #Plot resutls of all runs
@@ -239,20 +239,19 @@ def hillClimb():
     plt.show()
 
 def EASearch():
-
-    best_run_holder = []        # Holds list of best_eval_holders
-
-    best_run_fitness = 0.00
-    best_run = []
-    best_run_info = ''
-    generation_number_logger = []
+    # Data storage for information that lasts more than one run
+    best_run_holder = []            # Holds list of run longs
+    best_run_fitness = 0.00         # Holds best fitness value seen
+    best_run = []                   # Holds best run log
+    best_run_info = ''              # Holds best run log location
+    generation_number_logger = []   # Holds generation every run ended at
     # Collect 30 runs of data
     for run in range(NUMBER_OF_RUNS):
         time.sleep(0.01)
         print('Starting Run Series:',run)
 
+        # Run EA and log fitess, log, and end generation
         run_fitness, run_log, generation = evolution.evolutionDriver(_evalNum = 0, _runNum = run)
-        
         print('\n')
 
         # Check if last run is better than current best run
@@ -265,10 +264,12 @@ def EASearch():
         # Add last run to run storage
         best_run_holder.append(run_log)
 
-    #Plot resutls of all runs
+    #Print results of best run
     print('Best Fitness:', best_run_fitness)
     print('Best Location:', best_run_info)
 
+    # --- Print Graphs ---
+    
     # Format data to account for different generation end numbers
     longest_generation = max(generation_number_logger)
     

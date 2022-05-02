@@ -140,33 +140,37 @@ def test_convergence(population):
 def evolutionDriver(_evalNum = 0, _runNum = 0):
     # Data logging variables
     best_fitness_at_gen = []
+
+
+    # Create inital population
     print("**Creating initial population**")
-    
-    #Creates initial population
     current_population = create_initial_population()
-    print(f"Current Population size: {current_population.population_size}")
-    #Gets fitness of initial population
+    
+    #Gets fitness of initial population and display info about it
     evaluate_fitness(current_population, fuzz.testStrings)
     set_best_fitness(current_population)
     print(f"Best fitness of initial population: {current_population.best_fitness}")
     print(f"Average fitness of initial population: {current_population.average_fitness}")
+    print(f"Current Population size: {current_population.population_size}")
     # Log data
     best_fitness_at_gen.append(current_population.best_fitness)
 
 
-    #LOOP UNTIL CONVERGANCE. TODO: REPLACE WHILE FUNCTION WITH A CONVERGENCE FUNCTION
-
+    #LOOP UNTIL CONVERGANCE or 100 generations to convserve time
     generation = 0
-    while generation < 50:
+    while generation < 100:
         generation += 1
         print(f"-------------Generation {generation}----------------")
-        #Selects the population for reproduction
+
+
+        # Perform parent Selction
         print("**Starting selection process of population**")
         parents = perform_selection(current_population, selection_type = 'parent')
-
-        #Creates children and updates population accordingly with selection
+        # Perform crossover/recombination
         print("**Starting children generation process**")
         children = combine_and_add_children(current_population, parents)
+
+        # Perfrom mutation on children
         children_mutations = 0
         temp = "Created children with set numbers : "
         for child in children:
@@ -175,13 +179,12 @@ def evolutionDriver(_evalNum = 0, _runNum = 0):
         print(temp)
         print("A total of {} mutations occured during the process".format(children_mutations))
 
-        
-        #Gets fitness of combined
+        # Perform Fitness evalution
         evaluate_fitness(current_population, fuzz.testStrings)
         set_best_fitness(current_population)
 
 
-        #Culling population back to initial size
+        # Perform Survival Selection
         print("**Culling population back to size**")
         #Log size of pop before cull, then cull, then log size after
         precullNumber = len(current_population.fuzzer_sets)
@@ -193,7 +196,7 @@ def evolutionDriver(_evalNum = 0, _runNum = 0):
         print('Population Size:', current_population.population_size)
 
 
-        #Re-evalute final population fitness
+        # Re-evalute final population fitness
         print("**Evaluating fitness of population**") 
         evaluate_fitness(current_population, fuzz.testStrings)
         set_best_fitness(current_population)
@@ -208,7 +211,6 @@ def evolutionDriver(_evalNum = 0, _runNum = 0):
             break
 
     # Print strings of population at end to file called EvolutionOut.txt
-    #print('\n\nFinal Sets:',current_population.fuzzer_sets)
     outputFile = 'EvolutionOut.txt'
     data_out = open(outputFile, 'w')
     printItem = current_population.fuzzer_sets
